@@ -1,0 +1,167 @@
+package networkFormation;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+import repast.simphony.context.Context;
+import repast.simphony.context.space.continuous.ContinuousSpaceFactory;
+import repast.simphony.context.space.continuous.ContinuousSpaceFactoryFinder;
+import repast.simphony.context.space.graph.NetworkBuilder;
+import repast.simphony.dataLoader.ContextBuilder;
+import repast.simphony.space.continuous.ContinuousSpace;
+import repast.simphony.space.continuous.RandomCartesianAdder;
+import repast.simphony.space.graph.JungNetwork;
+import repast.simphony.space.graph.Network;
+import repast.simphony.space.graph.RepastEdge;
+
+public class ModelSetup implements ContextBuilder<Object>{
+	
+	private static Context mainContext;
+	public static ContinuousSpace <Object > space;
+	public static ArrayList<Node> allNodes;
+	public static ArrayList<Node> allInputNodes;
+	public static ArrayList<RepastEdge> allEdges;
+	public static Network network;
+	
+	private static int nodeSize ;
+	private static int landSize ;
+	
+	public Context<Object> build(Context<Object> context){
+		System.out.println("Running Network Formation model");
+
+		/********************************
+		 * 								*
+		 * initialize model parameters	*
+		 * 								*
+		 *******************************/
+
+		mainContext = context; //static link to context
+		allNodes = new ArrayList<Node>();	
+		allInputNodes = new ArrayList<Node>();	
+		allEdges = new ArrayList<RepastEdge>();
+		Parameter_set p = new Parameter_set();
+
+		nodeSize = p.initialNodeSize;
+		landSize = 1000;
+
+		System.out.println("Building geog");
+		
+		//ContinuousSpaceFactory spaceFactory = ContinuousSpaceFactoryFinder.createContinuousSpaceFactory(null);
+		//space = spaceFactory.createContinuousSpace("space", context , new RandomCartesianAdder <Object >(), new repast.simphony.space.continuous.StrictBorders(), landSize, landSize); 
+
+		NetworkBuilder <Object > netBuilder = new NetworkBuilder <Object > ("infection network", context , true); 
+		Network globalNet = netBuilder.buildNetwork();
+		
+		network=globalNet;
+
+		/************************************
+		 * 							        *
+		 * Adding Nodes to the landscape	*
+		 * 							        *
+		 * *********************************/
+
+		System.out.println("adding nodes"); 
+		
+		//Coordinate groupCoord = new Coordinate(RandomHelper.nextDoubleFromTo((0),(landSize)), RandomHelper.nextDoubleFromTo(0,(landSize)));
+		//Coordinate groupCoord = new Coordinate((landSize)/2.0, (landSize)/2.0);
+
+		for (int j = 0; j < nodeSize; j++){
+
+			//add node
+			//Coordinate coord = new Coordinate(RandomHelper.nextDoubleFromTo(groupCoord.x+(-Params.maxSocialDistance),(Params.maxSocialDistance)), groupCoord.y+RandomHelper.nextDoubleFromTo(-Params.maxSocialDistance,(Params.maxSocialDistance)));
+			//while(coord.x<0 || coord.y<0 || coord.x>this.landSize || coord.y>this.landSize){
+			//	coord = new Coordinate(groupCoord.x+RandomHelper.nextDoubleFromTo(-Params.maxSocialDistance,Params.maxSocialDistance), groupCoord.y+RandomHelper.nextDoubleFromTo(-Params.maxSocialDistance,(Params.maxSocialDistance)));
+			//}
+			Node node = new Node(context,space,globalNet);
+			allNodes.add(node);
+			context.add(node);
+			//space.moveTo(node, coord.x,coord.y);
+			
+			//if(j==nodeSize-1){
+			//	context.remove(node);
+			///	allNodes.remove(node);
+			//}
+		}
+
+		/************************************
+		 * 							        *
+		 * Adding Edges to the landscape	*
+		 * 							        *
+		 * *********************************/		
+
+		
+		Network <Object > net = (Network <Object >)context.getProjection("infection network");
+
+		/*int nEdges = 0;
+		for(int i = 0;i<allNodes.size();i++){
+			Node nodeStart = allNodes.get(i);
+			//nEdges = ((Double)Params.numb_connections.sample()).intValue();
+			//IndividualConnection.setConnections(nEdges, nodeStart, context, net);
+			if(i>0){
+				Edge re = new Edge(nodeStart, allNodes.get(0),true,0);
+				context.add(re);
+				net.addEdge(re);
+				//Coordinate[] coords = { ((Node)re.getSource()).getCoord(),((Node)re.getTarget()).getCoord()};
+				//LineString line = fac.createLineString(coords);
+				//geog.move(re,line);
+				
+			}
+		}*/
+		
+		int initalEdges = p.initialEdgeSize;
+		while(initalEdges>0){
+			Collections.shuffle(allNodes);
+			network.addEdge(allNodes.get(0), allNodes.get(1));
+			//Edge re = new Edge(allNodes.get(0), allNodes.get(1),true,0.8);
+			context.add(re);
+			net.addEdge(re);
+			initalEdges--;
+		}
+		
+		/*
+		//Bug with this version of repast... (https://sourceforge.net/p/repast/mailman/message/33492998/)
+		//edge removal
+		Edge diff = new Edge(true);
+		context.add(diff);
+		Coordinate coord = new Coordinate(0,0);
+		Point geom = fac.createPoint(coord);
+		geog.move(diff, geom);
+		//node removal
+		Node diff2 = new Node(true);
+		context.add(diff2);
+		Coordinate coordN = new Coordinate(0,0);
+		Point geomN = fac.createPoint(coordN);
+		geog.move(diff2, geomN);
+		*/
+
+		
+		
+		/************************************
+		 * 							        *
+		 * Scheduler to synchronize runs	*
+		 * 							        *
+		 * *********************************/
+
+		//executor takes care of the processing of the schedule
+		Executor executor = new Executor();
+		createSchedule(executor);
+
+		return context;
+	}
+	
+	private void createSchedule(Executor executor){
+
+		ISchedule schedule = RunEnvironment.getInstance().getCurrentSchedule();
+		
+		ScheduleParameters agentStepParams_space = ScheduleParameters.createRepeating(1, 1, 7); //start, interval, priority (high number = higher priority)
+		schedule.schedule(agentStepParams_space,executor,"processSpace");
+
+		ScheduleParameters agentStepParams_Nodes = ScheduleParameters.createRepeating(1, 1, 6); //start, interval, priority (high number = higher priority)
+		schedule.schedule(agentStepParams_Nodes,executor,"processNodes");
+
+		ScheduleParameters agentStepParams_death = ScheduleParameters.createRepeating(1, 1, 5); //start, interval, priority (high number = higher priority)
+		schedule.schedule(agentStepParams_death,executor,"updateNodes");
+
+	}
+
+}

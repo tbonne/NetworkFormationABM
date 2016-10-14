@@ -1,0 +1,22 @@
+package networkFormation;
+
+import repast.simphony.space.graph.Network;
+
+public class Executor {
+
+	public static void removeOneIndividual(){
+		
+	}
+	
+	public static void addNewIndividual(Network net){
+		//choose random mother
+		ModelSetup.getContext()
+		
+		net.
+	}
+	
+	public static void age(){
+		//nothing now
+	}
+	
+}

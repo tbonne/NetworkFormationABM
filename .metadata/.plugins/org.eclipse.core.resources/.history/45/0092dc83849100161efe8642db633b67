@@ -1,0 +1,35 @@
+package networkFormation;
+
+import repast.simphony.space.graph.Network;
+
+public class Executor {
+
+	public static void removeOneIndividual(){
+		
+	}
+	
+	public static void addNewIndividual(){
+		
+		//choose random mother
+		Node mother = (Node) ModelSetup.getContext().getRandomObject();
+		
+		//create new id
+		Node newID = new Node(ModelSetup.getContext(),ModelSetup.getSpace(),ModelSetup.getNetwork());
+		ModelSetup.getContext().add(newID);
+		
+		//create ties
+		createTies(newID);
+		
+		
+	}
+	
+	private void createTies(Node offspring, Node mother){
+		for(Node node:ModelSetup.getContext().getAgentTypes(Node.class))
+		
+	}
+	
+	public static void age(){
+		//nothing now
+	}
+	
+}

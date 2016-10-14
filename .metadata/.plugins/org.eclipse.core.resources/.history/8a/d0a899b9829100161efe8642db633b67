@@ -1,0 +1,17 @@
+package networkFormation;
+
+public class Executor {
+
+	public static void removeOneIndividual(){
+		
+	}
+	
+	public static void addNewIndividual(){
+		
+	}
+	
+	public static void age(){
+		
+	}
+	
+}

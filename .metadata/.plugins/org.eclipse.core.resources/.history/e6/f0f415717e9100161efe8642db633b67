@@ -1,0 +1,41 @@
+package networkFormation;
+
+import repast.simphony.context.Context;
+import repast.simphony.space.continuous.ContinuousSpace;
+import repast.simphony.space.graph.JungNetwork;
+
+public class Node {
+	
+	int id;
+	Context context;
+	
+	public Node(Context cont,ContinuousSpace <Object > space, JungNetwork net) {
+		context =cont;
+		
+		age=0;//RandomHelper.nextIntFromTo(0, Params.maxAge);
+		desired_Fertility = RandomHelper.nextDouble()*5;
+		desired_ageFirstBirth = RandomHelper.nextDoubleFromTo(16, 35); 
+		coord = coordinate;
+		this.space=space;
+
+		socialTime=0;
+		freeTime=1;
+		workTime=0;
+		careTime=0;
+		workLifeBalance=Math.random();
+		mWealth=0;
+		workToWealthEfficiency = Params.workToWealthEfficiency;
+
+		kinList = new ArrayList<Node>();
+		kidList = new ArrayList<Node>();
+		myEdges = null;
+		myNeighs= null;
+		myGeog = geog;
+		outNodes = new ArrayList<Node>();
+
+		context.add(this);
+		//Point geom = fac.createPoint(this.getCoord());
+		//myGeog.move(this,geom);
+	}
+
+}

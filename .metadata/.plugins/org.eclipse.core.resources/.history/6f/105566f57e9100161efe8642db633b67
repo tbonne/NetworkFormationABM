@@ -1,0 +1,16 @@
+package networkFormation;
+
+import repast.simphony.engine.environment.RunEnvironment;
+import repast.simphony.parameter.Parameters;
+
+public class Parameter_set {
+	
+	//List of parameters to set for each run
+	final static Parameters p = RunEnvironment.getInstance().getParameters();
+	
+	public Parameter_set(){
+		//maxAge = (Integer)p.getValue("maxAge");
+		
+	}
+
+}

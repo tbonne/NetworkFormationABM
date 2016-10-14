@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 2 elements from project &apos;NetworkFormation&apos;&#x0D;&#x0A;- Original project: &apos;NetworkFormation&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     networkFormation.ModelInitializer.groovy&#x0D;&#x0A;     ModelInitializer.agent" description="Delete elements" element1="src/networkFormation/ModelInitializer.agent" element2="/src&lt;networkFormation{ModelInitializer.groovy" elements="1" flags="589830" id="org.eclipse.jdt.ui.delete" resources="1" stamp="1476387233251" subPackages="false" version="1.0"/>
+</session>
