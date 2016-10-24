@@ -10,7 +10,7 @@ public class Parameter_set {
 	
 	public static int maxAge = 80;
 	public static int initialNodeSize = 50;
-	public static int initialEdgeSize = 100;
+	public static int initialEdgeSize = 25;
 	
 	public static double Pn = 0.8;
 	public static double Pr = 0.1;
@@ -18,7 +18,8 @@ public class Parameter_set {
 	
 	public Parameter_set(){
 		//maxAge = (Integer)p.getValue("maxAge");
-		
+		Pn = (Double)p.getValue("Pn");
+		Pr = (Double)p.getValue("Pr");
+		Pb = (Double)p.getValue("Pb");
 	}
-
 }

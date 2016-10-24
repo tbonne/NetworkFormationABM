@@ -1,0 +1,169 @@
+package networkFormation;
+
+import java.util.ArrayList;
+
+import org.rosuda.REngine.REXP;
+import org.rosuda.REngine.RList;
+import org.rosuda.REngine.Rserve.RConnection;
+
+public class NetStats {
+	
+	public static void calculateCosineSimilarity(Node offspring, Node mother){
+		
+		ArrayList<Integer> offspring_partners ;
+		ArrayList<Integer> mother_partners ;
+		
+		for(Node node: ModelSetup.getNodes()){
+			
+			if(node!=offspring && node!=mother){
+				
+				//for offspring
+				if(offspring.myNeigh.contains(node)){
+					offspring_partners.add(1);
+				} else {
+					offspring_partners.add(0);
+				}
+				
+				//for mother
+				if(mother.myNeigh.contains(node)){
+					mother_partners.add(1);
+				} else {
+					mother_partners.add(0);
+				}
+			}
+			
+		}
+		
+		
+		
+		
+		
+
+		try {
+			//System.out.println("Attempting to use R");
+			REXP x,x2;
+			RList l;
+			RConnection c = new RConnection();
+			//System.out.println("Connection set");
+			c.eval("library(igraph)");
+			//c.eval("library(dgof)");
+			//System.out.println("Library loaded");
+
+			try{
+
+
+				//recursive sampling 100 times for sample distribution
+				for(int i=0;i<100;i++){
+
+					//randomize sample
+					Collections.shuffle(total);
+
+					//create the intensity abundance, prevalence and intensity sub-samples
+					prevCount=0;
+					avgInten=0;
+					
+					for (int j=0;j<sampleSize;j++){                               
+						sub[j]=total.get(j);
+						if(total.get(j)>0){
+							sub2.add(total.get(j));
+							avgInten+=total.get(j);
+							prevCount++;
+						}
+					}
+
+					//convert to array
+					int[] sub2Array = new int[sub2.size()];
+					for(int j=0;j<sub2.size();j++){
+						sub2Array[j]=sub2.get(j);
+					}
+
+					//calculate prev dist
+					prevCount = prevCount/(double)sampleSize;
+					dist_prev = dist_prev+Math.pow((prevCount-observed_prevalence),2);
+					//if(prevCount==0)dist_prev=60;
+
+					//caculate in R the distance D from the observed distributions
+					c.assign("abun", observed_faecalCount);
+					c.assign("intensity", observed_intensity);
+					c.assign("x", sub);
+					c.assign("x2",sub2Array); 
+					try{
+						c.eval("d <- dgof::ks.test(x,abun)");
+						c.eval("d2 <- dgof::ks.test(x2,intensity)");
+					}catch(RserveException r){
+						c.eval("d2 <- 0");
+					}
+					x = c.eval("as.double(d[1])");
+					x2 = c.eval("as.double(d2[1])");
+
+					dist_abun = dist_abun + x.asDouble();
+					dist_int = dist_int + x2.asDouble();
+					if(prevCount==0)dist_int=60; //corrects for zero intensity distance when prevelance is 0 
+				}
+				
+				System.out.println("infected = "+prevCount+" intensity = "+avgInten+"  %="+avgInten/prevCount*(double)sampleSize);
+
+			}catch (RserveException r){
+				r.printStackTrace();
+				System.out.println("Failed to estimate k aggregation");
+				dist_abun=99999999;
+				dist_int=99999999;
+			}
+
+			try{
+				//estimate r naught for abundance of infections
+				int[] abun = convertIntegers(prevelence);
+				c.assign("abun", abun);
+				//System.out.println("assigning abundance data to R");
+				c.eval("library(grofit)");
+				//System.out.println("Library loaded");
+				c.eval("days <- 1:length(abun)");
+				c.eval("fit <- gcFitSpline(days,abun)");
+				x = c.eval("summary(fit)[1]");
+				l = x.asList();
+				double slopeA = l.at(0).asDouble();
+				//System.out.println("mu = "+slopeA + " this is r0 for abundance");
+				r_naught_abundance = slopeA;
+
+			}catch (RserveException r){
+				r.printStackTrace();
+				System.out.println("Failed to estimate R naught for the abundance data");
+				r_naught_abundance=0;
+			}
+
+			/*	try{
+				
+				
+				//estimate r naught for growth of larvae
+				double[] la = convertLongToDouble(cellsInfected);
+				c.assign("la", la);
+				//System.out.println("assigning infection data to R");
+				c.eval("library(grofit)");
+				//System.out.println("Library loaded");
+				c.eval("days <- 1:length(la)");
+				c.eval("fit <- gcFitSpline(days,la)");
+				x = c.eval("summary(fit)[1]");
+				l = x.asList();
+				double slopeA = l.at(0).asDouble();
+				//System.out.println("mu = "+slopeA +" for larvae growth");
+				r_naught_larvae = slopeA;
+				
+			}catch (RserveException r){
+				r.printStackTrace();
+				System.out.println("Failed to estimate R naught for larvae growth");
+				r_naught_larvae=0;r_naught_larvae=0;
+			}
+*/
+			c.close();
+
+
+		}catch (Exception e){
+			System.out.println("EX:"+e);
+			e.printStackTrace();
+		}
+
+
+		
+	}
+
+}

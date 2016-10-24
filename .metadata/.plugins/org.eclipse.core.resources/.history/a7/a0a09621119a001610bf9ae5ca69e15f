@@ -1,0 +1,85 @@
+package networkFormation;
+
+import java.util.ArrayList;
+
+import org.rosuda.REngine.REXP;
+import org.rosuda.REngine.REXPMismatchException;
+import org.rosuda.REngine.REngineException;
+import org.rosuda.REngine.RList;
+import org.rosuda.REngine.Rserve.RConnection;
+import org.rosuda.REngine.Rserve.RserveException;
+
+public class NetStats {
+
+	public static void calculateCosineSimilarity(Node offspring, Node mother){
+
+		ArrayList<Integer> offspring_partners ;
+		ArrayList<Integer> mother_partners ;
+
+		for(Node node: ModelSetup.getNodes()){
+
+			if(node!=offspring && node!=mother){
+
+				//for offspring
+				if(offspring.myNeigh.contains(node)){
+					offspring_partners.add(1);
+				} else {
+					offspring_partners.add(0);
+				}
+
+				//for mother
+				if(mother.myNeigh.contains(node)){
+					mother_partners.add(1);
+				} else {
+					mother_partners.add(0);
+				}
+			}
+
+		}
+
+
+		//convert arrayList to array
+		int[] offspringArray = new int[offspring_partners.size()];
+		int[] motherArray = new int[mother_partners.size()];
+		for(int j=0;j<offspring_partners.size();j++){
+			offspringArray[j]=offspring_partners.get(j);
+		}
+		for(int j=0;j<mother_partners.size();j++){
+			motherArray[j]=mother_partners.get(j);
+		}
+
+
+		try {
+			//System.out.println("Attempting to use R");
+			REXP cosineX,x2;
+			RList l;
+			RConnection c = new RConnection();
+			//System.out.println("Connection set");
+			c.eval("library(igraph)");
+			c.eval("library(lsa)");
+			//System.out.println("Library loaded");
+
+
+			//caculate in R the distance D from the observed distributions
+			c.assign("offP", offspringArray);
+			c.assign("motherP", motherArray);
+			c.eval("cosSim <- cosine(offP,motherP)");
+			cosineX = c.eval("cosSim[1]");
+			double cos = cosineX.asDouble();
+
+
+
+		} catch (RserveException rs){
+			rs.printStackTrace();
+			System.out.println("Failed to estimate cosine similarity: Rserve");
+		} catch (REngineException re){
+			re.printStackTrace();
+			System.out.println("Failed to estimate cosine similarity: Rengine");
+		} catch (REXPMismatchException rm){
+			rm.printStackTrace();
+			System.out.println("Failed to estimate cosine similarity: REXP Mismatch");
+
+		}
+
+	}
+}

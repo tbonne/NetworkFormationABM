@@ -602,3 +602,91 @@ java.lang.NullPointerException
 	at repast.simphony.ui.GUIScheduleRunner.go(GUIScheduleRunner.java:134)
 	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:48)
 	at java.lang.Thread.run(Unknown Source)
+FATAL [Thread-7] 2016-10-23 20:01:46,544 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (4.0)
+java.lang.NullPointerException
+	at saf.v3d.scene.VEdge2D.update(VEdge2D.java:90)
+	at repast.simphony.visualizationOGL2D.NetworkLayerOGL2D.update(NetworkLayerOGL2D.java:96)
+	at repast.simphony.visualizationOGL2D.DisplayOGL2D.update(DisplayOGL2D.java:408)
+	at repast.simphony.visualizationOGL2D.DisplayOGL2D.setPause(DisplayOGL2D.java:382)
+	at repast.simphony.render.RendererManager.setPause(RendererManager.java:49)
+	at repast.simphony.ui.GUIScheduleRunner.go(GUIScheduleRunner.java:134)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:48)
+	at java.lang.Thread.run(Unknown Source)
+FATAL [Thread-7] 2016-10-23 20:04:18,598 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (2.0)
+java.lang.NullPointerException
+	at saf.v3d.scene.VEdge2D.update(VEdge2D.java:90)
+	at repast.simphony.visualizationOGL2D.NetworkLayerOGL2D.update(NetworkLayerOGL2D.java:96)
+	at repast.simphony.visualizationOGL2D.DisplayOGL2D.update(DisplayOGL2D.java:408)
+	at repast.simphony.visualization.engine.DisplayComponentControllerAction$DisplayUpdater.execute(DisplayComponentControllerAction.java:44)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:238)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+FATAL [Thread-7] 2016-10-23 20:09:24,747 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (2.0)
+java.lang.NullPointerException
+	at saf.v3d.scene.VEdge2D.update(VEdge2D.java:90)
+	at repast.simphony.visualizationOGL2D.NetworkLayerOGL2D.update(NetworkLayerOGL2D.java:96)
+	at repast.simphony.visualizationOGL2D.DisplayOGL2D.update(DisplayOGL2D.java:408)
+	at repast.simphony.visualizationOGL2D.DisplayOGL2D.setPause(DisplayOGL2D.java:382)
+	at repast.simphony.render.RendererManager.setPause(RendererManager.java:49)
+	at repast.simphony.ui.GUIScheduleRunner.go(GUIScheduleRunner.java:134)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:48)
+	at java.lang.Thread.run(Unknown Source)
+FATAL [Thread-7] 2016-10-24 10:01:21,383 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (2.0)
+java.lang.NullPointerException
+	at saf.v3d.scene.VEdge2D.update(VEdge2D.java:90)
+	at repast.simphony.visualizationOGL2D.NetworkLayerOGL2D.update(NetworkLayerOGL2D.java:96)
+	at repast.simphony.visualizationOGL2D.DisplayOGL2D.update(DisplayOGL2D.java:408)
+	at repast.simphony.visualizationOGL2D.DisplayOGL2D.setPause(DisplayOGL2D.java:382)
+	at repast.simphony.render.RendererManager.setPause(RendererManager.java:49)
+	at repast.simphony.ui.GUIScheduleRunner.go(GUIScheduleRunner.java:134)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:48)
+	at java.lang.Thread.run(Unknown Source)
+FATAL [Thread-7] 2016-10-24 10:21:27,873 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (1.0)
+repast.simphony.data2.DataException: Error invoking method on object
+	at repast.simphony.data2.MethodDataSource.get(MethodDataSource.java:99)
+	at repast.simphony.data2.NonAggregateDataSet.record(NonAggregateDataSet.java:78)
+	at repast.simphony.data2.AbstractDataSetManager$ScheduledDataSet.execute(AbstractDataSetManager.java:119)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:238)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at networkFormation.Node$$FastClassByCGLIB$$6141570d.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.data2.MethodDataSource.get(MethodDataSource.java:97)
+	... 8 more
+Caused by: java.lang.NullPointerException
+	at networkFormation.Node.getDegree(Node.java:43)
+	... 11 more
+FATAL [Thread-7] 2016-10-24 11:45:46,594 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (1.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.CallBackAction.execute(CallBackAction.java:129)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at networkFormation.Executor$$FastClassByCGLIB$$da72245e.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.CallBackAction.execute(CallBackAction.java:127)
+	... 6 more
+Caused by: java.lang.NullPointerException
+	at networkFormation.NetStats.calculateCosineSimilarity(NetStats.java:27)
+	at networkFormation.Executor.recordNetworkStats(Executor.java:113)
+	at networkFormation.Executor.createTies(Executor.java:102)
+	at networkFormation.Executor.addNewIndividual(Executor.java:59)
+	at networkFormation.Executor.step(Executor.java:25)
+	... 9 more

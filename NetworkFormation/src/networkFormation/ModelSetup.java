@@ -3,6 +3,9 @@ package networkFormation;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import org.rosuda.REngine.Rserve.RConnection;
+import org.rosuda.REngine.Rserve.RserveException;
+
 import repast.simphony.context.Context;
 import repast.simphony.context.space.continuous.ContinuousSpaceFactory;
 import repast.simphony.context.space.continuous.ContinuousSpaceFactoryFinder;
@@ -25,9 +28,12 @@ public class ModelSetup implements ContextBuilder<Object>{
 	public static ArrayList<Node> allInputNodes;
 	public static ArrayList<RepastEdge> allEdges;
 	public static Network network;
+	public static double cosS;
 	
 	private static int nodeSize ;
 	private static int landSize ;
+	
+	private static RConnection c;
 	
 	public Context<Object> build(Context<Object> context){
 		System.out.println("Running Network Formation model");
@@ -46,7 +52,7 @@ public class ModelSetup implements ContextBuilder<Object>{
 
 		nodeSize = p.initialNodeSize;
 		landSize = 1000;
-
+		cosS = 0;
 		System.out.println("Building geog");
 		
 		//ContinuousSpaceFactory spaceFactory = ContinuousSpaceFactoryFinder.createContinuousSpaceFactory(null);
@@ -115,6 +121,21 @@ public class ModelSetup implements ContextBuilder<Object>{
 		//executor takes care of the processing of the schedule
 		Executor executor = new Executor();
 		createSchedule(executor);
+		
+		/************************************
+		 * 							        *
+		 * Connection to R for stats method	*
+		 * 							        *
+		 * *********************************/
+		c=null;
+		try {
+			c = new RConnection();
+		} catch (RserveException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 
 		return context;
 	}
@@ -123,14 +144,16 @@ public class ModelSetup implements ContextBuilder<Object>{
 
 		ISchedule schedule = RunEnvironment.getInstance().getCurrentSchedule();
 		
-		//ScheduleParameters agentStepParams_space = ScheduleParameters.createRepeating(1, 2, 2); //start, interval, priority (high number = higher priority)
-		//schedule.schedule(agentStepParams_space,executor,"removeOneIndividual");
+		ScheduleParameters agentStepParams_space = ScheduleParameters.createRepeating(1, 1, 2); //start, interval, priority (high number = higher priority)
+		schedule.schedule(agentStepParams_space,executor,"removeNode");
 
 		//ScheduleParameters agentStepParams_Nodes = ScheduleParameters.createRepeating(2, 2, 1); //start, interval, priority (high number = higher priority)
 		//schedule.schedule(agentStepParams_Nodes,executor,"addNewIndividual");
 
 		ScheduleParameters agentStepParams_death = ScheduleParameters.createRepeating(1, 1, 0); //start, interval, priority (high number = higher priority)
 		schedule.schedule(agentStepParams_death,executor,"step");
+		
+		
 
 	}
 	
@@ -164,5 +187,15 @@ public class ModelSetup implements ContextBuilder<Object>{
 		Collections.shuffle(allNodes);
 		return allNodes.get(0);
 	}
+	public static RConnection getR(){
+		return c;
+	}
+	public static double getCosineSimilarity(){
+		return cosS;
+	}
+	public static void setCosineSimilarity(double s){
+		cosS = s;
+	}
+	
 
 }
