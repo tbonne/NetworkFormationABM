@@ -11,7 +11,6 @@
 <fullyQualifiedTypeName name="repast.simphony.engine.schedule.ISchedule"/>
 <fullyQualifiedTypeName name="repast.simphony.engine.environment.RunEnvironment"/>
 <fullyQualifiedTypeName name="repast.simphony.engine.schedule.ScheduleParameters"/>
-<fullyQualifiedTypeName name="repast.simphony.space.graph.Network"/>
 <fullyQualifiedTypeName name="repast.simphony.random.RandomHelper"/>
 <fullyQualifiedTypeName name="repast.simphony.space.graph.UndirectedJungNetwork"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
@@ -23,10 +22,13 @@
 <fullyQualifiedTypeName name="org.apache.commons.collections.IteratorUtils"/>
 <fullyQualifiedTypeName name="org.rosuda.REngine.REXP"/>
 <fullyQualifiedTypeName name="org.rosuda.REngine.RList"/>
-<fullyQualifiedTypeName name="org.rosuda.REngine.Rserve.RConnection"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="org.rosuda.REngine.Rserve.RserveException"/>
 <fullyQualifiedTypeName name="org.rosuda.REngine.REngineException"/>
 <fullyQualifiedTypeName name="org.rosuda.REngine.REXPMismatchException"/>
 <fullyQualifiedTypeName name="networkFormation.ModelSetup"/>
+<fullyQualifiedTypeName name="repast.simphony.space.graph.Network"/>
+<fullyQualifiedTypeName name="org.rosuda.REngine.Rserve.RConnection"/>
+<fullyQualifiedTypeName name="org.rosuda.REngine.Rserve.RserveException"/>
+<fullyQualifiedTypeName name="java.io.BufferedWriter"/>
+<fullyQualifiedTypeName name="java.io.FileWriter"/>
 </qualifiedTypeNameHistroy>

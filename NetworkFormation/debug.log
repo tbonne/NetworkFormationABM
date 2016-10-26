@@ -690,3 +690,67 @@ Caused by: java.lang.NullPointerException
 	at networkFormation.Executor.addNewIndividual(Executor.java:59)
 	at networkFormation.Executor.step(Executor.java:25)
 	... 9 more
+FATAL [Thread-7] 2016-10-24 15:13:47,163 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (1.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.CallBackAction.execute(CallBackAction.java:129)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at networkFormation.Executor$$FastClassByCGLIB$$da72245e.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.CallBackAction.execute(CallBackAction.java:127)
+	... 6 more
+Caused by: java.lang.NullPointerException
+	at networkFormation.NetStats.calculateCosineSimilarity(NetStats.java:58)
+	at networkFormation.Executor.recordNetworkStats(Executor.java:114)
+	at networkFormation.Executor.createTies(Executor.java:103)
+	at networkFormation.Executor.addNewIndividual(Executor.java:59)
+	at networkFormation.Executor.step(Executor.java:25)
+	... 9 more
+FATAL [Thread-7] 2016-10-26 13:44:13,195 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (1.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.CallBackAction.execute(CallBackAction.java:129)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at networkFormation.Executor$$FastClassByCGLIB$$da72245e.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.CallBackAction.execute(CallBackAction.java:127)
+	... 6 more
+Caused by: java.lang.NullPointerException
+	at networkFormation.NetStats.calculateCosineSimilarity(NetStats.java:61)
+	at networkFormation.Executor.recordNetworkStats(Executor.java:114)
+	at networkFormation.Executor.createTies(Executor.java:103)
+	at networkFormation.Executor.addNewIndividual(Executor.java:59)
+	at networkFormation.Executor.step(Executor.java:25)
+	... 9 more
+FATAL [Thread-7] 2016-10-26 15:31:31,014 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (299.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.CallBackAction.execute(CallBackAction.java:129)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:238)
+	at repast.simphony.engine.schedule.Schedule.executeEndActions(Schedule.java:363)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:63)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at networkFormation.Executor$$FastClassByCGLIB$$da72245e.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.CallBackAction.execute(CallBackAction.java:127)
+	... 6 more
+Caused by: java.lang.IndexOutOfBoundsException: Index: 273, Size: 273
+	at java.util.ArrayList.rangeCheck(Unknown Source)
+	at java.util.ArrayList.get(Unknown Source)
+	at networkFormation.Executor.output(Executor.java:199)
+	... 9 more

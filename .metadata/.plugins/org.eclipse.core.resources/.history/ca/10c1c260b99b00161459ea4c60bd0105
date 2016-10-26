@@ -1,0 +1,193 @@
+package networkFormation;
+
+import java.util.ArrayList;
+
+import org.rosuda.REngine.REXP;
+import org.rosuda.REngine.REXPMismatchException;
+import org.rosuda.REngine.REngine;
+import org.rosuda.REngine.REngineException;
+import org.rosuda.REngine.RList;
+import org.rosuda.REngine.Rserve.RserveException;
+
+import repast.simphony.space.graph.Network;
+
+public class NetStats {
+	
+	
+	/************************** cosine similarity ******************************************/
+
+	public static void calculateCosineSimilarity(Node offspring, Node mother){
+
+		ArrayList<Integer> offspring_partners = new ArrayList<Integer>();
+		ArrayList<Integer> mother_partners = new ArrayList<Integer>();
+
+		for(Node node: ModelSetup.getNodes()){
+
+			if(node!=offspring && node!=mother){
+
+				//for offspring
+				if(offspring.myNeigh.contains(node)){
+					offspring_partners.add(1);
+				} else {
+					offspring_partners.add(0);
+				}
+
+				//for mother
+				if(mother.myNeigh.contains(node)){
+					mother_partners.add(1);
+				} else {
+					mother_partners.add(0);
+				}
+			}
+
+		}
+
+		//convert arrayList to array
+		int[] offspringArray = new int[offspring_partners.size()];
+		int[] motherArray = new int[mother_partners.size()];
+		for(int j=0;j<offspring_partners.size();j++){
+			offspringArray[j]=offspring_partners.get(j);
+		}
+		for(int j=0;j<mother_partners.size();j++){
+			motherArray[j]=mother_partners.get(j);
+		}
+
+
+		try {
+			//System.out.println("Attempting to use R");
+			REXP cosineX,x2;
+			RList l;
+			//System.out.println("Connection set");
+			ModelSetup.getR().eval("library(igraph)");
+			ModelSetup.getR().eval("library(lsa)");
+			//System.out.println("Library loaded");
+
+			//caculate in R the distance D from the observed distributions
+			ModelSetup.getR().assign("offP", offspringArray);
+			ModelSetup.getR().assign("motherP", motherArray);
+			ModelSetup.getR().eval("cosSim <- cosine(offP,motherP)");
+			cosineX = ModelSetup.getR().eval("cosSim");
+			double cos = cosineX.asDouble();
+			if(cos>0){
+				Executor.setCosineSimilarity(cos);
+				System.out.println("cosine similarity = "+ cos);
+			} else {
+				System.out.println("cosine similarity = "+ 0);
+			}
+			
+
+
+		} catch (RserveException rs){
+			rs.printStackTrace();
+			System.out.println("Failed to estimate cosine similarity: Rserve");
+		} catch (REngineException re){
+			re.printStackTrace();
+			System.out.println("Failed to estimate cosine similarity: Rengine");
+		} catch (REXPMismatchException rm){
+			rm.printStackTrace();
+			System.out.println("Failed to estimate cosine similarity: REXP Mismatch");
+
+		}
+
+	}
+	
+	/************************** Graph level statistics ******************************************/
+	
+	public static void calculateGraphLevelStats(){
+		
+		int[][] asso = getAssociationMatrix();
+		
+		getGlobalClusteringCoef(asso);
+		
+		
+	}
+	
+	private static int[][] getAssociationMatrix(){
+		
+		ArrayList<Node> nodes = ModelSetup.getNodes();
+		Network net = ModelSetup.getNetwork();
+		int[][] associationM = new int[nodes.size()][nodes.size()];
+		
+		for(int i =0; i<nodes.size(); i++){
+			
+			for(int j = 0;j<nodes.size();j++){
+				
+				if(net.isAdjacent(nodes.get(i), nodes.get(j))){
+					associationM[i][j]=1;
+				} else {
+					associationM[i][j]=0;
+				}
+			}
+		}
+		
+		return associationM;
+		
+		
+	}
+	
+	private static void getAvgBetweenness(){
+		
+	}
+	
+	private static void getGlobalClusteringCoef(int[][] asso){
+		
+		try {
+			//System.out.println("Attempting to use R");
+			REXP clusterC;
+			
+			ModelSetup.getR().eval("library(igraph)");
+
+			//caculate in R the distance D from the observed distributions
+			assignAsRMatrix(asso, "a");
+			ModelSetup.getR().eval("a.m <- as.matrix(a)");
+			ModelSetup.getR().eval("gg <- graph_from_adjacency_matrix(a.m)");
+			ModelSetup.getR().eval("gg.cluster <- transitivity(gg)");
+			
+			clusterC = ModelSetup.getR().eval("gg.cluster");
+			double cluster = clusterC.asDouble();
+			Executor.setClusteringCoef(cluster);
+			System.out.println("Clustering coef = "+ cluster);
+
+
+		} catch (RserveException rs){
+			rs.printStackTrace();
+			System.out.println("Failed to estimate cosine similarity: Rserve");
+		} catch (REngineException re){
+			re.printStackTrace();
+			System.out.println("Failed to estimate cosine similarity: Rengine");
+		} catch (REXPMismatchException rm){
+			rm.printStackTrace();
+			System.out.println("Failed to estimate cosine similarity: REXP Mismatch");
+
+		}
+		
+		
+	}
+	
+    /**
+     * Creates and assigns a matrix object in R from 2D table of double
+     *
+     * @param rEngine        the  R instance used
+     * @param sourceArray    the 2D table of double
+     *                       the matrix must have always the same column number on every row
+     * @param nameToAssignOn the R object name
+     * @return R matrix instance or null if R return an error
+     * @throws REngineException 
+     */
+    public static REXP assignAsRMatrix(int[][] sourceArray, String nameToAssignOn) throws REngineException {
+        if (sourceArray.length == 0) {
+            return null;
+        }
+
+        ModelSetup.getR().assign(nameToAssignOn, sourceArray[0]);
+        REXP resultMatrix = ModelSetup.getR().eval(nameToAssignOn + " <- matrix( " + nameToAssignOn + " ,nr=1)");
+        for (int i = 1; i < sourceArray.length; i++) {
+        	ModelSetup.getR().assign("temp", sourceArray[i]);
+            resultMatrix = ModelSetup.getR().eval(nameToAssignOn + " <- rbind(" + nameToAssignOn + ",matrix(temp,nr=1))");
+        }
+
+        return resultMatrix;
+    }
+    
+    
+}

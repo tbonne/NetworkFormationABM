@@ -1,7 +1,7 @@
 <repast.simphony.data2.engine.DataSetDescriptor>
-  <name>Cosine</name>
+  <name>Node Degree</name>
   <type>NON_AGGREGATE</type>
-  <sourceType>networkFormation.ModelSetup</sourceType>
+  <sourceType>networkFormation.Node</sourceType>
   <inclTick>true</inclTick>
   <inclBatchRun>false</inclBatchRun>
   <inclRandomSeed>false</inclRandomSeed>
@@ -12,16 +12,16 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>1888375638</hashCode>
+    <hashCode>219962176</hashCode>
   </scheduleParams>
   <atEnd>false</atEnd>
   <methodDataSources class="linked-hash-map">
     <entry>
-      <string>CosineSimilarity</string>
+      <string>Degree</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>CosineSimilarity</id>
-        <className>networkFormation.ModelSetup</className>
-        <methodName>getCosineSimilarity</methodName>
+        <id>Degree</id>
+        <className>networkFormation.Node</className>
+        <methodName>getDegree</methodName>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
   </methodDataSources>

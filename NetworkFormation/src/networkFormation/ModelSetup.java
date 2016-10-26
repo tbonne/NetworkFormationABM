@@ -28,7 +28,6 @@ public class ModelSetup implements ContextBuilder<Object>{
 	public static ArrayList<Node> allInputNodes;
 	public static ArrayList<RepastEdge> allEdges;
 	public static Network network;
-	public static double cosS;
 	
 	private static int nodeSize ;
 	private static int landSize ;
@@ -52,12 +51,8 @@ public class ModelSetup implements ContextBuilder<Object>{
 
 		nodeSize = p.initialNodeSize;
 		landSize = 1000;
-		cosS = 0;
 		System.out.println("Building geog");
 		
-		//ContinuousSpaceFactory spaceFactory = ContinuousSpaceFactoryFinder.createContinuousSpaceFactory(null);
-		//space = spaceFactory.createContinuousSpace("space", context , new RandomCartesianAdder <Object >(), new repast.simphony.space.continuous.StrictBorders(), landSize, landSize); 
-
 		NetworkBuilder <Object> netBuilder = new NetworkBuilder <Object > ("Social network", context , false); 
 		network = netBuilder.buildNetwork();
 		
@@ -70,26 +65,10 @@ public class ModelSetup implements ContextBuilder<Object>{
 
 		System.out.println("adding nodes"); 
 		
-		//Coordinate groupCoord = new Coordinate(RandomHelper.nextDoubleFromTo((0),(landSize)), RandomHelper.nextDoubleFromTo(0,(landSize)));
-		//Coordinate groupCoord = new Coordinate((landSize)/2.0, (landSize)/2.0);
-
 		for (int j = 0; j < nodeSize; j++){
-
-			//add node
-			//Coordinate coord = new Coordinate(RandomHelper.nextDoubleFromTo(groupCoord.x+(-Params.maxSocialDistance),(Params.maxSocialDistance)), groupCoord.y+RandomHelper.nextDoubleFromTo(-Params.maxSocialDistance,(Params.maxSocialDistance)));
-			//while(coord.x<0 || coord.y<0 || coord.x>this.landSize || coord.y>this.landSize){
-			//	coord = new Coordinate(groupCoord.x+RandomHelper.nextDoubleFromTo(-Params.maxSocialDistance,Params.maxSocialDistance), groupCoord.y+RandomHelper.nextDoubleFromTo(-Params.maxSocialDistance,(Params.maxSocialDistance)));
-			//}
-			//Node node = new Node(context,space,globalNet);
 			Node node = new Node();
 			context.add(node);
 			allNodes.add(node);
-			//space.moveTo(node, coord.x,coord.y);
-			
-			//if(j==nodeSize-1){
-			//	context.remove(node);
-			///	allNodes.remove(node);
-			//}
 		}
 
 		/************************************
@@ -121,20 +100,7 @@ public class ModelSetup implements ContextBuilder<Object>{
 		//executor takes care of the processing of the schedule
 		Executor executor = new Executor();
 		createSchedule(executor);
-		
-		/************************************
-		 * 							        *
-		 * Connection to R for stats method	*
-		 * 							        *
-		 * *********************************/
-		c=null;
-		try {
-			c = new RConnection();
-		} catch (RserveException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		context.add(executor);
 		
 
 		return context;
@@ -147,13 +113,11 @@ public class ModelSetup implements ContextBuilder<Object>{
 		ScheduleParameters agentStepParams_space = ScheduleParameters.createRepeating(1, 1, 2); //start, interval, priority (high number = higher priority)
 		schedule.schedule(agentStepParams_space,executor,"removeNode");
 
-		//ScheduleParameters agentStepParams_Nodes = ScheduleParameters.createRepeating(2, 2, 1); //start, interval, priority (high number = higher priority)
-		//schedule.schedule(agentStepParams_Nodes,executor,"addNewIndividual");
-
 		ScheduleParameters agentStepParams_death = ScheduleParameters.createRepeating(1, 1, 0); //start, interval, priority (high number = higher priority)
 		schedule.schedule(agentStepParams_death,executor,"step");
 		
-		
+		ScheduleParameters stop = ScheduleParameters.createAtEnd(ScheduleParameters.LAST_PRIORITY);
+		schedule.schedule(stop, executor, "output");
 
 	}
 	
@@ -186,15 +150,6 @@ public class ModelSetup implements ContextBuilder<Object>{
 	public static Node getRandNode(){
 		Collections.shuffle(allNodes);
 		return allNodes.get(0);
-	}
-	public static RConnection getR(){
-		return c;
-	}
-	public static double getCosineSimilarity(){
-		return cosS;
-	}
-	public static void setCosineSimilarity(double s){
-		cosS = s;
 	}
 	
 
