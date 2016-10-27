@@ -16,24 +16,17 @@ public class Node {
 	List<RepastEdge> myEdges;
 	List<Node> myNeigh;
 	Network network;
-	//Context context;
-	//ContinuousSpace space;
 	
-	//public Node(Context cont,ContinuousSpace <Object > space, Network net) {
 	public Node() {	
-		//context =cont;
 		age=0;//RandomHelper.nextIntFromTo(0, Params.maxAge);
 		dead=0;
 		myEdges = null;
 		myNeigh = new ArrayList<Node>();
 		network = ModelSetup.getNetwork();
 		degree = 0;
-		//this.space=space;
-
 	}
 	
 	public void step(){
-		//nothing right now
 		age++;
 		myEdges = IteratorUtils.toList(network.getEdges(this).iterator());
 		myNeigh = IteratorUtils.toList(network.getAdjacent(this).iterator());
@@ -52,6 +45,10 @@ public class Node {
 	public List<Node> getMyNeigh(){
 		myNeigh = IteratorUtils.toList(network.getAdjacent(this).iterator());
 		return myNeigh;
+	}
+	
+	public double getMeanDegree(){
+		return degree/(double)ModelSetup.getNodes().size();
 	}
 	
 }

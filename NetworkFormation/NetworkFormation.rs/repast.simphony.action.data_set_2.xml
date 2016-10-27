@@ -33,6 +33,15 @@
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
+    <entry>
+      <string>MeanDegree</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>MeanDegree</id>
+        <className>networkFormation.Node</className>
+        <methodName>getMeanDegree</methodName>
+        <aggType>MEAN</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
   </methodDataSources>
   <countSources class="linked-hash-map"/>
   <customNADataSources class="linked-hash-map"/>

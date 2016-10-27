@@ -10,12 +10,14 @@ import org.apache.commons.collections.IteratorUtils;
 import org.rosuda.REngine.Rserve.RConnection;
 import org.rosuda.REngine.Rserve.RserveException;
 
+import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.random.RandomHelper;
 import repast.simphony.space.graph.Network;
 import repast.simphony.space.graph.RepastEdge;
 
 public class Executor {
 
+	public static int stepCounter;
 	public static double cosS,clusteringC;
 	public static ArrayList<Double> meanNodeDegreeArray, clusteringCoefArray, cosineArray;
 
@@ -25,6 +27,7 @@ public class Executor {
 		meanNodeDegreeArray = new ArrayList<Double>();
 		clusteringCoefArray = new ArrayList<Double>();
 		cosineArray = new ArrayList<Double>();
+		stepCounter=0;
 	}
 
 	/******************************************************************************************************/
@@ -42,7 +45,13 @@ public class Executor {
 		for(Node node : ModelSetup.getNodes()){
 			node.step();
 		}
-
+		
+		//step counter 
+		stepCounter++;
+		
+		if(stepCounter>Parameter_set.runTime){
+			endModel();
+		}
 	}
 
 
@@ -165,6 +174,10 @@ public class Executor {
 
 		}
 
+	}
+	
+	private static void endModel(){
+		RunEnvironment.getInstance().endAt(RunEnvironment.getInstance().getCurrentSchedule().getTickCount());
 	}
 
 	/******************************************************************************************************/
