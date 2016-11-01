@@ -16,7 +16,6 @@
 <fullyQualifiedTypeName name="java.util.Collections"/>
 <fullyQualifiedTypeName name="org.apache.velocity.context.Context"/>
 <fullyQualifiedTypeName name="repast.simphony.context.Context"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="repast.simphony.space.graph.RepastEdge"/>
 <fullyQualifiedTypeName name="org.apache.commons.collections.IteratorUtils"/>
 <fullyQualifiedTypeName name="org.rosuda.REngine.REXP"/>
@@ -31,4 +30,8 @@
 <fullyQualifiedTypeName name="java.io.FileWriter"/>
 <fullyQualifiedTypeName name="networkFormation.ModelSetup"/>
 <fullyQualifiedTypeName name="repast.simphony.engine.environment.RunEnvironment"/>
+<fullyQualifiedTypeName name="au.com.bytecode.opencsv.CSVReader"/>
+<fullyQualifiedTypeName name="java.io.FileReader"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="java.util.List"/>
 </qualifiedTypeNameHistroy>

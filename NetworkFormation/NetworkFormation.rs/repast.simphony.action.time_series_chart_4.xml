@@ -1,6 +1,6 @@
 <repast.simphony.chart2.engine.TimeSeriesChartDescriptor>
-  <name>Graph statistics</name>
-  <dataSet>Graph</dataSet>
+  <name>Graph Time Series</name>
+  <dataSet>Graph data</dataSet>
   <xAxisLabel>Tick Count</xAxisLabel>
   <yAxisLabel></yAxisLabel>
   <chartTitle>Graph Statistics</chartTitle>
@@ -33,9 +33,9 @@
       </SeriesData>
     </entry>
     <entry>
-      <string>MeanDegree</string>
+      <string>Degree</string>
       <SeriesData>
-        <label>MeanDegree</label>
+        <label>Degree</label>
         <color>
           <red>0</red>
           <green>255</green>

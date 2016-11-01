@@ -18,8 +18,8 @@ import repast.simphony.space.graph.RepastEdge;
 public class Executor {
 
 	public static int stepCounter;
-	public static double cosS,clusteringC;
-	public static ArrayList<Double> meanNodeDegreeArray, clusteringCoefArray, cosineArray;
+	public static double cosS,clusteringC,meanBetweennes,modularity;
+	public static ArrayList<Double> meanNodeDegreeArray, clusteringCoefArray, cosineArray,modularityArray,betweennesArray;
 
 	public Executor (){
 		cosS = 0;
@@ -27,6 +27,8 @@ public class Executor {
 		meanNodeDegreeArray = new ArrayList<Double>();
 		clusteringCoefArray = new ArrayList<Double>();
 		cosineArray = new ArrayList<Double>();
+		modularityArray = new ArrayList<Double>();
+		betweennesArray = new ArrayList<Double>();
 		stepCounter=0;
 	}
 
@@ -212,7 +214,7 @@ public class Executor {
 			summaryStats_out.newLine();
 			
 			//set header
-			summaryStats_out.append("MeanDegree,ClusteringCoef,CosineSimilarity,TimeStamp");
+			summaryStats_out.append("MeanDegree,ClusteringCoef,CosineSimilarity,MeanBetweennes,Modularity,TimeStamp");
 			summaryStats_out.newLine();
 			
 			//record values
@@ -223,6 +225,10 @@ public class Executor {
 				summaryStats_out.append(((Double)clusteringCoefArray.get(i)).toString());
 				summaryStats_out.append(",");
 				summaryStats_out.append(((Double)cosineArray.get(i)).toString());
+				summaryStats_out.append(",");
+				summaryStats_out.append(((Double)betweennesArray.get(i)).toString());
+				summaryStats_out.append(",");
+				summaryStats_out.append(((Double)modularityArray.get(i)).toString());
 				summaryStats_out.append(",");
 				summaryStats_out.append(((Integer)(i)).toString());
 				summaryStats_out.newLine();
@@ -263,6 +269,26 @@ public class Executor {
 	public static void addToCosineArray(double d){
 		cosineArray.add(d);
 	}
+	public static void setBetweennessCoef(double d){
+		meanBetweennes = d;
+	}
+	public static double getBetweennessCoef(){
+		return meanBetweennes;
+	}
+	public static void addToBetweennessCoefArray(double d){
+		betweennesArray.add(d);
+	}
+	public static void addToModularityArray(double d){
+		modularityArray.add(d);
+	}
+	public static void setModularity(double d){
+		modularity = d;
+	}
+	public static double getModularity(){
+		return modularity;
+	}
+	
+	
 	
 	
 }

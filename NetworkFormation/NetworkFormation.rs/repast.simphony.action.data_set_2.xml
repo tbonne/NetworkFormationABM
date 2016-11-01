@@ -1,5 +1,5 @@
 <repast.simphony.data2.engine.DataSetDescriptor>
-  <name>Graph</name>
+  <name>Graph data</name>
   <type>AGGREGATE</type>
   <inclTick>true</inclTick>
   <inclBatchRun>false</inclBatchRun>
@@ -11,7 +11,7 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>459322965</hashCode>
+    <hashCode>-777199607</hashCode>
   </scheduleParams>
   <atEnd>false</atEnd>
   <methodDataSources class="linked-hash-map">
@@ -34,9 +34,9 @@
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>MeanDegree</string>
+      <string>Degree</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>MeanDegree</id>
+        <id>Degree</id>
         <className>networkFormation.Node</className>
         <methodName>getMeanDegree</methodName>
         <aggType>MEAN</aggType>

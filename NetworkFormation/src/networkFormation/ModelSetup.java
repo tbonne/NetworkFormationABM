@@ -1,11 +1,16 @@
 package networkFormation;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import org.rosuda.REngine.Rserve.RConnection;
 import org.rosuda.REngine.Rserve.RserveException;
 
+import au.com.bytecode.opencsv.CSVReader;
 import repast.simphony.context.Context;
 import repast.simphony.context.space.continuous.ContinuousSpaceFactory;
 import repast.simphony.context.space.continuous.ContinuousSpaceFactoryFinder;
@@ -56,30 +61,71 @@ public class ModelSetup implements ContextBuilder<Object>{
 		NetworkBuilder <Object> netBuilder = new NetworkBuilder <Object > ("Social network", context , false); 
 		network = netBuilder.buildNetwork();
 		
+		//layout = new FruchGraphLayout(agentList, xSize, ySize);
+		//Network2DDisplay display = new Network2DDisplay(layout);
+		//surface.addDisplayableProbeable(display, "Network Display");
+		
 
 		/************************************
 		 * 							        *
-		 * Adding Nodes to the landscape	*
+		 * Empirical graph creation     	*
 		 * 							        *
 		 * *********************************/
 
-		System.out.println("adding nodes"); 
+		System.out.println("creating graph"); 
 		
+		//read in data
+		String[][] dataArr=null;
+		List<String[]> list=null;
+		try {
+			//read data
+			CSVReader csvReader = new CSVReader(new FileReader(new File("data/EmpiricalNet.csv")));
+			list = csvReader.readAll();
+			 
+			//Convert to 2D array
+			dataArr = new String[list.size()][];
+			dataArr = list.toArray(dataArr);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//create nodes
+		for (int j = 0; j < list.size(); j++){
+			Node node = new Node();
+			context.add(node);
+			allNodes.add(node);
+		}
+		
+		//add edges
+		for(int i = 1;i<list.size();i++){
+			for(int j = 1; j<list.size();j++){
+				if(Integer.parseInt(dataArr[i][j])>0){
+					network.addEdge(allNodes.get(i), allNodes.get(j));
+				} else {
+					//no edge
+				}
+			}
+		}
+		
+
+		/************************************
+		 * 							        *
+		 * Random Social network creation	*
+		 * 							        *
+		 * *********************************/		
+
+		/*
+		Network <Object > net = (Network <Object >)context.getProjection("Social network");
+
+		//add nodes
 		for (int j = 0; j < nodeSize; j++){
 			Node node = new Node();
 			context.add(node);
 			allNodes.add(node);
 		}
 
-		/************************************
-		 * 							        *
-		 * Adding Edges to the Social network	*
-		 * 							        *
-		 * *********************************/		
-
-		
-		Network <Object > net = (Network <Object >)context.getProjection("Social network");
-
+		//add edges
 		int initalEdges = p.initialEdgeSize;
 		while(initalEdges>0){
 			Collections.shuffle(allNodes);
@@ -90,6 +136,7 @@ public class ModelSetup implements ContextBuilder<Object>{
 			initalEdges--;
 		}
 		
+		*/
 		
 		/************************************
 		 * 							        *

@@ -68,10 +68,10 @@ public class NetStats {
 			double cos = cosineX.asDouble();
 			if(cos>0){
 				Executor.setCosineSimilarity(cos);
-				System.out.println("cosine similarity = "+ cos);
+				//System.out.println("cosine similarity = "+ cos);
 				Executor.addToCosineArray(cos);
 			} else {
-				System.out.println("cosine similarity = "+ 0);
+				//System.out.println("cosine similarity = "+ 0);
 				Executor.addToCosineArray(0);
 			}
 
@@ -95,9 +95,8 @@ public class NetStats {
 		
 		int[][] asso = getAssociationMatrix();
 		
-		getGlobalClusteringCoef(c,asso);
+		getGraphStatsFromR(c,asso);
 		getMeanDegree();
-		//getBetweenness();
 		
 	}
 	
@@ -142,11 +141,11 @@ public class NetStats {
 		
 	}
 	
-	private static void getGlobalClusteringCoef(RConnection c, int[][] asso){
+	private static void getGraphStatsFromR(RConnection c, int[][] asso){
 		
 		try {
 			//System.out.println("Attempting to use R");
-			REXP clusterC;
+			REXP clusterC, betweenness, mod;
 			
 			c.eval("library(igraph)");
 
@@ -155,13 +154,27 @@ public class NetStats {
 			c.eval("a.m <- as.matrix(a)");
 			c.eval("gg <- graph_from_adjacency_matrix(a.m)");
 			c.eval("gg.cluster <- transitivity(gg)");
-			
+			c.eval("gg.betweenness <- mean(betweenness(gg))");
+			c.eval("gg.commu <- cluster_walktrap(gg)");
+			c.eval("gg.mod <- modularity(gg.commu)");
+
+			//clustering coef
 			clusterC = c.eval("gg.cluster");
 			double cluster = clusterC.asDouble();
 			Executor.setClusteringCoef(cluster);
-			System.out.println("Clustering coef = "+ cluster);
 			Executor.addToClusteringCoefArray(cluster);
 
+			//betweenness
+			betweenness = c.eval("gg.betweenness");
+			double bet = betweenness.asDouble();
+			Executor.setBetweennessCoef(bet);
+			Executor.addToBetweennessCoefArray(bet);
+			
+			//modularity
+			mod = c.eval("gg.mod");
+			double modularity = mod.asDouble();
+			Executor.setModularity(modularity);
+			Executor.addToModularityArray(modularity);
 
 		} catch (RserveException rs){
 			rs.printStackTrace();
