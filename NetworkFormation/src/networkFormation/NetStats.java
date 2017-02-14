@@ -18,8 +18,11 @@ public class NetStats {
 
 	public static void calculateCosineSimilarity(RConnection c,Node offspring, Node mother){
 
-		ArrayList<Integer> offspring_partners = new ArrayList<Integer>();
-		ArrayList<Integer> mother_partners = new ArrayList<Integer>();
+		ArrayList<Double> offspring_partners = new ArrayList<Double>();
+		ArrayList<Double> mother_partners = new ArrayList<Double>();
+		
+		ArrayList<Integer> offspring_partners_binary = new ArrayList<Integer>();
+		ArrayList<Integer> mother_not_partners = new ArrayList<Integer>();
 
 		for(Node node: ModelSetup.getNodes()){
 
@@ -27,28 +30,40 @@ public class NetStats {
 
 				//for offspring
 				if(offspring.myNeigh.contains(node)){
-					offspring_partners.add(1);
+					double weightN = ModelSetup.getNetwork().getEdge(offspring, node).getWeight();
+					offspring_partners.add(weightN);
+					offspring_partners_binary.add(1);
 				} else {
-					offspring_partners.add(0);
+					offspring_partners.add(0.0);
+					offspring_partners_binary.add(0);
 				}
 
 				//for mother
 				if(mother.myNeigh.contains(node)){
-					mother_partners.add(1);
+					double weightN = ModelSetup.getNetwork().getEdge(mother, node).getWeight();
+					mother_partners.add(weightN);
+					mother_not_partners.add(0);
 				} else {
-					mother_partners.add(0);
+					mother_partners.add(0.0);
+					mother_not_partners.add(1);
 				}
 			}
 		}
 
 		//convert arrayList to array
-		int[] offspringArray = new int[offspring_partners.size()];
-		int[] motherArray = new int[mother_partners.size()];
+		double[] offspringArray = new double[offspring_partners.size()];
+		double[] motherArray = new double[mother_partners.size()];
+		
+		int[] offspringArrayBinary = new int[offspring_partners_binary.size()];
+		int[] notMotherArray = new int[mother_not_partners.size()];
+		
 		for(int j=0;j<offspring_partners.size();j++){
 			offspringArray[j]=offspring_partners.get(j);
+			offspringArrayBinary[j]=offspring_partners_binary.get(j);
 		}
 		for(int j=0;j<mother_partners.size();j++){
 			motherArray[j]=mother_partners.get(j);
+			notMotherArray[j]=mother_not_partners.get(j);
 		}
 
 
@@ -59,7 +74,7 @@ public class NetStats {
 			c.eval("library(igraph)");
 			c.eval("library(lsa)");
 
-			//caculate in R the distance D from the observed distributions
+			//Estimate of Pn from grooming interactions
 			c.assign("offP", offspringArray);
 			c.assign("motherP", motherArray);
 			c.eval("cosSim <- cosine(offP,motherP)");
@@ -72,6 +87,21 @@ public class NetStats {
 			} else {
 				//System.out.println("cosine similarity = "+ 0);
 				Executor.addToCosineArray(0);
+			}
+			
+			//Estimate of Pr from grooming interactions
+			c.assign("offP", offspringArrayBinary);
+			c.assign("motherP", notMotherArray);
+			c.eval("cosSim <- cosine(offP,motherP)");
+			cosineX = c.eval("cosSim");
+			double cosPr = cosineX.asDouble();
+			if(cosPr>0){
+				Executor.setCosineSimilarityPr(cosPr);
+				//System.out.println("cosine similarity = "+ cos);
+				Executor.addToCosinePrArray(cosPr);
+			} else {
+				//System.out.println("cosine similarity = "+ 0);
+				Executor.addToCosinePrArray(0);
 			}
 
 		} catch (RserveException rs){
@@ -139,6 +169,7 @@ public class NetStats {
 		Executor.addToMeanDegreeArray(meanDegree);
 		
 	}
+	
 	
 	private static void getGraphStatsFromR(RConnection c, int[][] asso){
 		

@@ -67,14 +67,14 @@ public class ModelSetup implements ContextBuilder<Object>{
 		 * 							        *
 		 * *********************************/
 
-		System.out.println("creating graph: Pr = "+Parameter_set.Pr+" Pn = "+Parameter_set.Pn); 
+		System.out.println("creating graph: Pr = "+Parameter_set.Pr+" Pn = "+Parameter_set.Pn + " Pwr = "+ Parameter_set.Pwr+ " Pwn = "+ Parameter_set.Pwn); 
 		
 		//read in data
 		String[][] dataArr=null;
 		List<String[]> list=null;
 		try {
 			//read data
-			CSVReader csvReader = new CSVReader(new FileReader(new File("data/EmpiricalNet.csv")));
+			CSVReader csvReader = new CSVReader(new FileReader(new File("data/RST7.csv")));
 			list = csvReader.readAll();
 			 
 			//Convert to 2D array
@@ -95,8 +95,9 @@ public class ModelSetup implements ContextBuilder<Object>{
 		//add edges
 		for(int i = 1;i<list.size();i++){
 			for(int j = 1; j<list.size();j++){
-				if(Integer.parseInt(dataArr[i][j])>0){
-					network.addEdge(allNodes.get(i), allNodes.get(j));
+				double weight = Integer.parseInt(dataArr[i][j]);
+				if(weight>0){
+					network.addEdge(allNodes.get(i), allNodes.get(j),weight);
 				} else {
 					//no edge
 				}

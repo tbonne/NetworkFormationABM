@@ -16,13 +16,13 @@
   <netStyles>
     <entry>
       <string>Social network</string>
-      <string>repast.simphony.visualizationOGL2D.DefaultEdgeStyleOGL2D</string>
+      <string>repast.simphony.visualization.editedStyle.EditedEdgeStyle2D</string>
     </entry>
   </netStyles>
   <editedNetStyles>
     <entry>
       <string>Social network</string>
-      <null/>
+      <string>Socialnetwork.style_0.xml</string>
     </entry>
   </editedNetStyles>
   <frequency>ON_NEW</frequency>
@@ -33,7 +33,7 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>-1968335352</hashCode>
+    <hashCode>-1699673303</hashCode>
   </schedParams>
   <layoutClassName>repast.simphony.visualization.visualization2D.layout.FRLayout2D</layoutClassName>
   <layoutProjection>Social network</layoutProjection>

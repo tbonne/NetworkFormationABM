@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections.IteratorUtils;
+import org.apache.commons.math3.distribution.BinomialDistribution;
 import org.rosuda.REngine.Rserve.RConnection;
 import org.rosuda.REngine.Rserve.RserveException;
 
@@ -18,8 +19,9 @@ import repast.simphony.space.graph.RepastEdge;
 public class Executor {
 
 	public static int stepCounter;
-	public static double cosS,clusteringC,meanBetweennes,modularity;
-	public static ArrayList<Double> meanNodeDegreeArray, clusteringCoefArray, cosineArray,modularityArray,betweennesArray;
+	public static double cosS,cosSPr,clusteringC,meanBetweennes,modularity;
+	public static ArrayList<Double> meanNodeDegreeArray, clusteringCoefArray, cosineArray,cosinePrArray,modularityArray,betweennesArray;
+	private static BinomialDistribution bd_Pwr, bd_Pwn;
 
 	public Executor (){
 		cosS = 0;
@@ -27,9 +29,12 @@ public class Executor {
 		meanNodeDegreeArray = new ArrayList<Double>();
 		clusteringCoefArray = new ArrayList<Double>();
 		cosineArray = new ArrayList<Double>();
+		cosinePrArray = new ArrayList<Double>();
 		modularityArray = new ArrayList<Double>();
 		betweennesArray = new ArrayList<Double>();
 		stepCounter=0;
+		bd_Pwr = new BinomialDistribution(Parameter_set.maxGroomingEffort, Parameter_set.Pwr);
+		bd_Pwn = new BinomialDistribution(Parameter_set.maxGroomingEffort, Parameter_set.Pwn);
 	}
 
 	/******************************************************************************************************/
@@ -90,7 +95,7 @@ public class Executor {
 		//get mother links (if any)
 		List<Node> motherPartners = mother.getMyNeigh();
 
-		//loop though and create links based on Pn, Pr, and Pb
+		//loop though and create links based on Pn, Pr, Pb, and Pw
 		for(Node node:ModelSetup.getNodes()){
 
 			//If the node is not the offspring in question
@@ -100,7 +105,8 @@ public class Executor {
 				if(node.equals(mother)){
 					//this is Pb
 					if(RandomHelper.nextDouble()<Parameter_set.Pb){
-						net.addEdge(offspring, mother);	
+						double sample = bd_Pwn.sample();
+						net.addEdge(offspring, mother,sample);
 					}
 
 					//If this node is not the mother
@@ -109,13 +115,15 @@ public class Executor {
 					//this is Pn: mother's partner
 					if(motherPartners.contains(node)){
 						if(RandomHelper.nextDouble()<Parameter_set.Pn){
-							net.addEdge(offspring, node);
+							double sample = bd_Pwn.sample();
+							net.addEdge(offspring, node,sample);
 						}
 
-						//this is Pr: unknown partner
+					//this is Pr: unknown partner
 					} else {
 						if(RandomHelper.nextDouble()<Parameter_set.Pr){
-							net.addEdge(offspring, node);
+							double sample = bd_Pwr.sample();
+							net.addEdge(offspring, node,sample);
 						}
 					}
 				}
@@ -262,17 +270,21 @@ public class Executor {
 		}
 		
 		//calculate mean and sd of cosine estimates
-		double mean = 0;
+		double mean = 0,meanPr=0;
 		for(int i = 0; i < Parameter_set.cosineMeanLength;i++){
 			mean = mean + cosineArray.get(cosineArray.size()-1-i);
+			meanPr = meanPr + cosinePrArray.get(cosinePrArray.size()-1-i);
 		}
 		mean = mean / (double)Parameter_set.cosineMeanLength;
+		meanPr = meanPr / (double)Parameter_set.cosineMeanLength;
 		
-		double sd = 0;
+		double sd = 0, sdPr= 0;
 		for(int i = 0; i < Parameter_set.cosineMeanLength;i++){
 			sd = sd + Math.pow(mean - cosineArray.get(cosineArray.size()-1-i),2);
+			sdPr = sdPr + Math.pow(meanPr - cosinePrArray.get(cosinePrArray.size()-1-i),2);
 		}
 		sd = Math.pow(sd/(Parameter_set.cosineMeanLength-1),0.5);
+		sdPr = Math.pow(sdPr/(Parameter_set.cosineMeanLength-1),0.5);
 
 		//Transfer the recorded data to the output file
 		try {
@@ -297,6 +309,10 @@ public class Executor {
 			summaryStats_out.append(",");
 			summaryStats_out.append(((Double)sd).toString());
 			summaryStats_out.append(",");
+			summaryStats_out.append(((Double)meanPr).toString());
+			summaryStats_out.append(",");
+			summaryStats_out.append(((Double)sdPr).toString());
+			summaryStats_out.append(",");
 			summaryStats_out.append(((Double)betweennesArray.get(betweennesArray.size()-1)).toString());
 			summaryStats_out.append(",");
 			summaryStats_out.append(((Double)modularityArray.get(modularityArray.size()-1)).toString());
@@ -308,6 +324,10 @@ public class Executor {
 			summaryStats_out.append(((Double)Parameter_set.Pn).toString());
 			summaryStats_out.append(", ");
 			summaryStats_out.append(((Double)Parameter_set.Pr).toString());
+			summaryStats_out.append(", ");
+			summaryStats_out.append(((Double)Parameter_set.Pwr).toString());
+			summaryStats_out.append(", ");
+			summaryStats_out.append(((Double)Parameter_set.Pwn).toString());
 			summaryStats_out.newLine();
 
 			summaryStats_out.flush();
@@ -345,6 +365,9 @@ public class Executor {
 	public static void addToCosineArray(double d){
 		cosineArray.add(d);
 	}
+	public static void addToCosinePrArray(double d){
+		cosinePrArray.add(d);
+	}
 	public static void setBetweennessCoef(double d){
 		meanBetweennes = d;
 	}
@@ -363,8 +386,8 @@ public class Executor {
 	public static double getModularity(){
 		return modularity;
 	}
-
-
-
+	public static void setCosineSimilarityPr(double cosPr) {
+		cosSPr = cosPr;
+	}
 
 }
