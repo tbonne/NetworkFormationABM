@@ -1,5 +1,14 @@
 eclipse.preferences.version=1
+org.eclipse.jdt.core.classpathVariable.ARCGIS_RUNTIME_FOR_JAVA=C\:/RepastSimphony-2.3.1/eclipse/configuration/org.eclipse.osgi/494/0/.cp/lib/
+org.eclipse.jdt.core.classpathVariable.ARCGIS_RUNTIME_FOR_JAVA_TOOLKIT=C\:/RepastSimphony-2.3.1/eclipse/configuration/org.eclipse.osgi/496/0/.cp/lib/
 org.eclipse.jdt.core.classpathVariable.ECLIPSE_HOME=C\:/RepastSimphony-2.3.1/eclipse/
+org.eclipse.jdt.core.classpathVariable.JRE_LIB=C\:/Program Files/Java/jre8/lib/rt.jar
+org.eclipse.jdt.core.classpathVariable.JRE_SRC=
+org.eclipse.jdt.core.classpathVariable.JRE_SRCROOT=
+org.eclipse.jdt.core.classpathVariable.JUNIT_HOME=C\:/RepastSimphony-2.3.1/eclipse/plugins/org.junit_4.11.0.v201303080030/
+org.eclipse.jdt.core.classpathVariable.JUNIT_SRC_HOME=C\:/RepastSimphony-2.3.1/eclipse/plugins/org.junit.source_4.11.0.v201303080030.jar
+org.eclipse.jdt.core.classpathVariable.M2_REPO=C\:/Users/t-work/.m2/repository
+org.eclipse.jdt.core.classpathVariable.STAND_ALONE_BATCH_CLASSPATH=C\:/RepastSimphony-2.3.1/eclipse/plugins/repast.simphony.distributed.batch.ui_2.3.1/bin-standalone
 org.eclipse.jdt.core.codeComplete.visibilityCheck=enabled
 org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
 org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.8

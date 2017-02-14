@@ -1,0 +1,13 @@
+model.archive = C:/Users/t-work/Documents/GitHub/NetworkFormationABM/NetworkFormation/output/complete_model.jar
+batch.params.file = scenario.rs/batch_params.xml
+ssh.key_dir = C:/Users/t-work/.ssh
+poll.frequency = 60.0
+model.output = C:/Users/t-work/Documents/GitHub/NetworkFormationABM/NetworkFormation/output
+
+vm.arguments = -Xmx512M
+local.0.instances = 6
+local.0.working_directory = C:/Users/t-work/AppData/Local/Temp/
+output.pattern.1.path = C:\Users\t-work\Documents\GitHub\NetworkFormationABM\NetworkFormation\
+output.pattern.1.pattern = NetworkFormation_output_distances.csv
+output.pattern.1.concatenate = true
+output.pattern.1.header = true

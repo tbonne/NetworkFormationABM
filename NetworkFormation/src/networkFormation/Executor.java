@@ -47,10 +47,10 @@ public class Executor {
 		for(Node node : ModelSetup.getNodes()){
 			node.step();
 		}
-		
+
 		//step counter 
 		stepCounter++;
-		
+
 		if(stepCounter>Parameter_set.runTime){
 			endModel();
 		}
@@ -177,7 +177,7 @@ public class Executor {
 		}
 
 	}
-	
+
 	private static void endModel(){
 		RunEnvironment.getInstance().endAt(RunEnvironment.getInstance().getCurrentSchedule().getTickCount());
 	}
@@ -187,6 +187,15 @@ public class Executor {
 	/******************************************************************************************************/
 
 	public static void output(){
+
+		output_eachTimeStep();
+		output_finalDistances();
+
+
+
+	}
+
+	private static void output_eachTimeStep(){
 
 		//Create the writer and the output file
 		BufferedWriter summaryStats_out=null;
@@ -212,11 +221,11 @@ public class Executor {
 			summaryStats_out.append(", ");
 			summaryStats_out.newLine();
 			summaryStats_out.newLine();
-			
+
 			//set header
 			summaryStats_out.append("MeanDegree,ClusteringCoef,CosineSimilarity,MeanBetweennes,Modularity,TimeStamp");
 			summaryStats_out.newLine();
-			
+
 			//record values
 			for(int i = 0 ; i<meanNodeDegreeArray.size();i++){
 
@@ -233,13 +242,80 @@ public class Executor {
 				summaryStats_out.append(((Integer)(i)).toString());
 				summaryStats_out.newLine();
 			}
-			
+
 			summaryStats_out.flush();
 			summaryStats_out.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private static void output_finalDistances(){
+
+		//Create the writer and the output file
+		BufferedWriter summaryStats_out=null;
+		try {
+			summaryStats_out = new BufferedWriter(new FileWriter("C:/Users/t-work/Documents/GitHub/NetworkFormationABM/NetworkFormation/NetworkFormation_output_distances.csv", true));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+		//calculate mean and sd of cosine estimates
+		double mean = 0;
+		for(int i = 0; i < Parameter_set.cosineMeanLength;i++){
+			mean = mean + cosineArray.get(cosineArray.size()-1-i);
+		}
+		mean = mean / (double)Parameter_set.cosineMeanLength;
+		
+		double sd = 0;
+		for(int i = 0; i < Parameter_set.cosineMeanLength;i++){
+			sd = sd + Math.pow(mean - cosineArray.get(cosineArray.size()-1-i),2);
+		}
+		sd = Math.pow(sd/(Parameter_set.cosineMeanLength-1),0.5);
+
+		//Transfer the recorded data to the output file
+		try {
+
+			//record values
+			summaryStats_out.append(((Double)meanNodeDegreeArray.get(0)).toString());
+			summaryStats_out.append(",");
+			summaryStats_out.append(((Double)clusteringCoefArray.get(0)).toString());
+			summaryStats_out.append(",");
+			summaryStats_out.append(((Double)cosineArray.get(0)).toString());
+			summaryStats_out.append(",");
+			summaryStats_out.append(((Double)betweennesArray.get(0)).toString());
+			summaryStats_out.append(",");
+			summaryStats_out.append(((Double)modularityArray.get(0)).toString());
+			summaryStats_out.append(",");
+			summaryStats_out.append(((Double)meanNodeDegreeArray.get(meanNodeDegreeArray.size()-1)).toString());
+			summaryStats_out.append(",");
+			summaryStats_out.append(((Double)clusteringCoefArray.get(clusteringCoefArray.size()-1)).toString());
+			summaryStats_out.append(",");
+			//summaryStats_out.append(((Double)cosineArray.get(cosineArray.size()-1)).toString());
+			summaryStats_out.append(((Double)mean).toString());
+			summaryStats_out.append(",");
+			summaryStats_out.append(((Double)sd).toString());
+			summaryStats_out.append(",");
+			summaryStats_out.append(((Double)betweennesArray.get(betweennesArray.size()-1)).toString());
+			summaryStats_out.append(",");
+			summaryStats_out.append(((Double)modularityArray.get(modularityArray.size()-1)).toString());
+			summaryStats_out.append(",");
+			summaryStats_out.append(((Integer)(Parameter_set.runTime)).toString());
+			summaryStats_out.append(", ");
+			summaryStats_out.append(((Double)Parameter_set.Pb).toString());
+			summaryStats_out.append(", ");
+			summaryStats_out.append(((Double)Parameter_set.Pn).toString());
+			summaryStats_out.append(", ");
+			summaryStats_out.append(((Double)Parameter_set.Pr).toString());
+			summaryStats_out.newLine();
+
+			summaryStats_out.flush();
+			summaryStats_out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 
@@ -287,8 +363,8 @@ public class Executor {
 	public static double getModularity(){
 		return modularity;
 	}
-	
-	
-	
-	
+
+
+
+
 }

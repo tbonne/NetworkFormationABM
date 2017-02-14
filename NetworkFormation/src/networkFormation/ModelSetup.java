@@ -34,9 +34,6 @@ public class ModelSetup implements ContextBuilder<Object>{
 	public static ArrayList<RepastEdge> allEdges;
 	public static Network network;
 	
-	private static int nodeSize ;
-	private static int landSize ;
-	
 	private static RConnection c;
 	
 	public Context<Object> build(Context<Object> context){
@@ -54,8 +51,6 @@ public class ModelSetup implements ContextBuilder<Object>{
 		allEdges = new ArrayList<RepastEdge>();
 		Parameter_set p = new Parameter_set();
 
-		nodeSize = p.initialNodeSize;
-		landSize = 1000;
 		System.out.println("Building geog");
 		
 		NetworkBuilder <Object> netBuilder = new NetworkBuilder <Object > ("Social network", context , false); 
@@ -72,7 +67,7 @@ public class ModelSetup implements ContextBuilder<Object>{
 		 * 							        *
 		 * *********************************/
 
-		System.out.println("creating graph"); 
+		System.out.println("creating graph: Pr = "+Parameter_set.Pr+" Pn = "+Parameter_set.Pn); 
 		
 		//read in data
 		String[][] dataArr=null;
@@ -106,6 +101,11 @@ public class ModelSetup implements ContextBuilder<Object>{
 					//no edge
 				}
 			}
+		}
+		
+		//initialize nodes
+		for(Node n : allNodes){
+			n.step();
 		}
 		
 
@@ -148,7 +148,6 @@ public class ModelSetup implements ContextBuilder<Object>{
 		Executor executor = new Executor();
 		createSchedule(executor);
 		context.add(executor);
-		
 
 		return context;
 	}

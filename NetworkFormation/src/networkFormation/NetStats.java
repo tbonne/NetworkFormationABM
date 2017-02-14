@@ -39,7 +39,6 @@ public class NetStats {
 					mother_partners.add(0);
 				}
 			}
-
 		}
 
 		//convert arrayList to array

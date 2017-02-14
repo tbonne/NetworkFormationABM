@@ -1,3 +1,1 @@
-<?xml version="1.0"?>
-<sweep runs="1">
-</sweep>
+<?xml version="1.0" ?><sweep runs="1"><parameter name="randomSeed" type="constant" constant_type="int" value="1234"></parameter><parameter name="Pb" type="constant" constant_type="double" value="1"></parameter><parameter name="runTime" type="constant" constant_type="int" value="2000"></parameter><parameter name="Pr" type="number" number_type="double" start="0.1" end="1.0" step="0.1"><parameter name="Pn" type="number" number_type="double" start="0.1" end="1.0" step="0.1"></parameter></parameter></sweep>
