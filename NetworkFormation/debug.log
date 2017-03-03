@@ -1,118 +1,5 @@
-INFO  [Thread-3] 2016-11-14 11:38:13,104 repast.simphony.batch.ssh.LocalSession - Building geog
-INFO  [Thread-3] 2016-11-14 11:38:13,104 repast.simphony.batch.ssh.LocalSession - creating graph: Pr = 0.1 Pn = 0.2
-INFO  [Thread-3] 2016-11-14 11:38:13,144 repast.simphony.batch.ssh.LocalSession - Running Network Formation model
-INFO  [Thread-3] 2016-11-14 11:38:13,144 repast.simphony.batch.ssh.LocalSession - Building geog
-INFO  [Thread-3] 2016-11-14 11:38:13,144 repast.simphony.batch.ssh.LocalSession - creating graph: Pr = 0.1 Pn = 0.6
-INFO  [Thread-3] 2016-11-14 11:38:13,183 repast.simphony.batch.ssh.LocalSession - Running Network Formation model
-INFO  [Thread-3] 2016-11-14 11:38:13,183 repast.simphony.batch.ssh.LocalSession - Building geog
-INFO  [Thread-3] 2016-11-14 11:38:13,183 repast.simphony.batch.ssh.LocalSession - creating graph: Pr = 0.1 Pn = 0.4
-INFO  [pool-2-thread-1] 2016-11-14 11:38:31,209 repast.simphony.batch.ssh.LocalDonePoller - Polled C:\Users\t-work\AppData\Local\Temp\simphony_model_1479148348484 for DONE:  no
-INFO  [pool-2-thread-1] 2016-11-14 11:39:31,210 repast.simphony.batch.ssh.LocalDonePoller - Polled C:\Users\t-work\AppData\Local\Temp\simphony_model_1479148348484 for DONE:  no
-INFO  [pool-2-thread-1] 2016-11-14 11:40:31,211 repast.simphony.batch.ssh.LocalDonePoller - Polled C:\Users\t-work\AppData\Local\Temp\simphony_model_1479148348484 for DONE:  no
-INFO  [Thread-3] 2016-11-14 11:41:03,486 repast.simphony.batch.ssh.LocalSession - Running Network Formation model
-INFO  [Thread-3] 2016-11-14 11:41:03,486 repast.simphony.batch.ssh.LocalSession - Building geog
-INFO  [Thread-3] 2016-11-14 11:41:03,486 repast.simphony.batch.ssh.LocalSession - creating graph: Pr = 0.1 Pn = 0.5
-INFO  [Thread-3] 2016-11-14 11:41:03,539 repast.simphony.batch.ssh.LocalSession - Running Network Formation model
-INFO  [Thread-3] 2016-11-14 11:41:03,539 repast.simphony.batch.ssh.LocalSession - Building geog
-INFO  [Thread-3] 2016-11-14 11:41:03,539 repast.simphony.batch.ssh.LocalSession - creating graph: Pr = 0.1 Pn = 0.1
-INFO  [Thread-3] 2016-11-14 11:41:03,708 repast.simphony.batch.ssh.LocalSession - Running Network Formation model
-INFO  [Thread-3] 2016-11-14 11:41:03,708 repast.simphony.batch.ssh.LocalSession - Building geog
-INFO  [Thread-3] 2016-11-14 11:41:03,708 repast.simphony.batch.ssh.LocalSession - creating graph: Pr = 0.1 Pn = 0.3
-INFO  [Thread-3] 2016-11-14 11:41:03,768 repast.simphony.batch.ssh.LocalSession - Running Network Formation model
-INFO  [Thread-3] 2016-11-14 11:41:03,768 repast.simphony.batch.ssh.LocalSession - Building geog
-INFO  [Thread-3] 2016-11-14 11:41:03,768 repast.simphony.batch.ssh.LocalSession - creating graph: Pr = 0.1 Pn = 0.2
-INFO  [Thread-3] 2016-11-14 11:41:03,800 repast.simphony.batch.ssh.LocalSession - Running Network Formation model
-INFO  [Thread-3] 2016-11-14 11:41:03,800 repast.simphony.batch.ssh.LocalSession - Building geog
-INFO  [Thread-3] 2016-11-14 11:41:03,800 repast.simphony.batch.ssh.LocalSession - creating graph: Pr = 0.1 Pn = 0.6
-INFO  [Thread-3] 2016-11-14 11:41:03,843 repast.simphony.batch.ssh.LocalSession - Running Network Formation model
-INFO  [Thread-3] 2016-11-14 11:41:03,843 repast.simphony.batch.ssh.LocalSession - Building geog
-INFO  [Thread-3] 2016-11-14 11:41:03,843 repast.simphony.batch.ssh.LocalSession - creating graph: Pr = 0.1 Pn = 0.4
-INFO  [pool-2-thread-1] 2016-11-14 11:41:31,212 repast.simphony.batch.ssh.LocalDonePoller - Polled C:\Users\t-work\AppData\Local\Temp\simphony_model_1479148348484 for DONE:  no
-INFO  [pool-2-thread-1] 2016-11-14 11:42:31,212 repast.simphony.batch.ssh.LocalDonePoller - Polled C:\Users\t-work\AppData\Local\Temp\simphony_model_1479148348484 for DONE:  no
-INFO  [pool-2-thread-1] 2016-11-14 11:43:31,212 repast.simphony.batch.ssh.LocalDonePoller - Polled C:\Users\t-work\AppData\Local\Temp\simphony_model_1479148348484 for DONE:  no
-INFO  [Thread-3] 2016-11-14 11:43:41,636 repast.simphony.batch.ssh.LocalSession - Running Network Formation model
-INFO  [Thread-3] 2016-11-14 11:43:41,636 repast.simphony.batch.ssh.LocalSession - Building geog
-INFO  [Thread-3] 2016-11-14 11:43:41,636 repast.simphony.batch.ssh.LocalSession - creating graph: Pr = 0.1 Pn = 0.5
-INFO  [Thread-3] 2016-11-14 11:43:41,681 repast.simphony.batch.ssh.LocalSession - Running Network Formation model
-INFO  [Thread-3] 2016-11-14 11:43:41,681 repast.simphony.batch.ssh.LocalSession - Building geog
-INFO  [Thread-3] 2016-11-14 11:43:41,681 repast.simphony.batch.ssh.LocalSession - creating graph: Pr = 0.1 Pn = 0.1
-INFO  [Thread-3] 2016-11-14 11:43:41,845 repast.simphony.batch.ssh.LocalSession - Running Network Formation model
-INFO  [Thread-3] 2016-11-14 11:43:41,845 repast.simphony.batch.ssh.LocalSession - Building geog
-INFO  [Thread-3] 2016-11-14 11:43:41,845 repast.simphony.batch.ssh.LocalSession - creating graph: Pr = 0.1 Pn = 0.3
-INFO  [Thread-3] 2016-11-14 11:43:41,903 repast.simphony.batch.ssh.LocalSession - Running Network Formation model
-INFO  [Thread-3] 2016-11-14 11:43:41,904 repast.simphony.batch.ssh.LocalSession - Building geog
-INFO  [Thread-3] 2016-11-14 11:43:41,904 repast.simphony.batch.ssh.LocalSession - creating graph: Pr = 0.1 Pn = 0.2
-INFO  [Thread-3] 2016-11-14 11:43:41,929 repast.simphony.batch.ssh.LocalSession - Running Network Formation model
-INFO  [Thread-3] 2016-11-14 11:43:41,929 repast.simphony.batch.ssh.LocalSession - Building geog
-INFO  [Thread-3] 2016-11-14 11:43:41,929 repast.simphony.batch.ssh.LocalSession - creating graph: Pr = 0.1 Pn = 0.6
-INFO  [Thread-3] 2016-11-14 11:43:41,965 repast.simphony.batch.ssh.LocalSession - Running Network Formation model
-INFO  [Thread-3] 2016-11-14 11:43:41,965 repast.simphony.batch.ssh.LocalSession - Building geog
-INFO  [Thread-3] 2016-11-14 11:43:41,965 repast.simphony.batch.ssh.LocalSession - creating graph: Pr = 0.1 Pn = 0.4
-INFO  [pool-2-thread-1] 2016-11-14 11:44:31,219 repast.simphony.batch.ssh.LocalDonePoller - Polled C:\Users\t-work\AppData\Local\Temp\simphony_model_1479148348484 for DONE:  no
-FATAL [Thread-7] 2017-02-07 12:19:17,692 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.CallBackAction.execute(CallBackAction.java:129)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:238)
-	at repast.simphony.engine.schedule.Schedule.executeEndActions(Schedule.java:363)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:63)
-	at java.lang.Thread.run(Unknown Source)
-Caused by: java.lang.reflect.InvocationTargetException
-	at networkFormation.Executor$$FastClassByCGLIB$$da72245e.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.CallBackAction.execute(CallBackAction.java:127)
-	... 6 more
-Caused by: java.lang.ArrayIndexOutOfBoundsException: -1
-	at java.util.ArrayList.elementData(Unknown Source)
-	at java.util.ArrayList.get(Unknown Source)
-	at networkFormation.Executor.output_finalDistances(Executor.java:267)
-	at networkFormation.Executor.output(Executor.java:192)
-	... 9 more
-FATAL [Thread-8] 2017-02-14 14:06:48,878 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (315.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.CallBackAction.execute(CallBackAction.java:129)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Unknown Source)
-Caused by: java.lang.reflect.InvocationTargetException
-	at networkFormation.Executor$$FastClassByCGLIB$$da72245e.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.CallBackAction.execute(CallBackAction.java:127)
-	... 6 more
-Caused by: java.lang.NullPointerException
-	at networkFormation.Executor.createTies(Executor.java:105)
-	at networkFormation.Executor.addNewIndividual(Executor.java:84)
-	at networkFormation.Executor.step(Executor.java:46)
-	... 9 more
-FATAL [Thread-8] 2017-02-14 14:37:54,303 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.CallBackAction.execute(CallBackAction.java:129)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:238)
-	at repast.simphony.engine.schedule.Schedule.executeEndActions(Schedule.java:363)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:63)
-	at java.lang.Thread.run(Unknown Source)
-Caused by: java.lang.reflect.InvocationTargetException
-	at networkFormation.Executor$$FastClassByCGLIB$$da72245e.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.CallBackAction.execute(CallBackAction.java:127)
-	... 6 more
-Caused by: java.lang.ArrayIndexOutOfBoundsException: -1
-	at java.util.ArrayList.elementData(Unknown Source)
-	at java.util.ArrayList.get(Unknown Source)
-	at networkFormation.Executor.output_finalDistances(Executor.java:274)
-	at networkFormation.Executor.output(Executor.java:199)
-	... 9 more
-FATAL [Thread-9] 2017-02-14 14:37:58,662 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
+FATAL [Thread-8] 2017-03-02 10:54:43,453 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (501.0)
 java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 	at repast.simphony.engine.schedule.CallBackAction.execute(CallBackAction.java:129)
 	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
@@ -127,3 +14,272 @@ Caused by: java.lang.reflect.InvocationTargetException
 	at repast.simphony.engine.schedule.CallBackAction.execute(CallBackAction.java:127)
 	... 6 more
 Caused by: java.lang.ArrayIndexOutOfBoundsException
+FATAL [Thread-7] 2017-03-02 10:55:38,255 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (501.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.CallBackAction.execute(CallBackAction.java:129)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:238)
+	at repast.simphony.engine.schedule.Schedule.executeEndActions(Schedule.java:363)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:63)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at networkFormation.Executor$$FastClassByCGLIB$$da72245e.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.CallBackAction.execute(CallBackAction.java:127)
+	... 6 more
+Caused by: java.lang.ArrayIndexOutOfBoundsException: -1
+	at java.util.ArrayList.elementData(Unknown Source)
+	at java.util.ArrayList.get(Unknown Source)
+	at networkFormation.Executor.output_finalDistances(Executor.java:291)
+	at networkFormation.Executor.output(Executor.java:204)
+	... 9 more
+ERROR [AWT-EventQueue-0] 2017-03-02 11:23:04,208 repast.simphony.ui.RSApplication - Error while initializing simulation
+java.lang.NumberFormatException: For input string: ""
+	at java.lang.NumberFormatException.forInputString(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at networkFormation.ModelSetup.build(ModelSetup.java:102)
+	at repast.simphony.dataLoader.engine.ClassNameContextBuilder.build(ClassNameContextBuilder.java:41)
+	at repast.simphony.dataLoader.engine.DataLoaderControllerAction.runInitialize(DataLoaderControllerAction.java:48)
+	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
+	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
+	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:292)
+	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
+	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
+	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:288)
+	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
+	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
+	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:157)
+	at repast.simphony.ui.RSApplication.step(RSApplication.java:209)
+	at repast.simphony.ui.action.StepRun.actionPerformed(StepRun.java:17)
+	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
+	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
+	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
+	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
+	at java.awt.Component.processMouseEvent(Unknown Source)
+	at javax.swing.JComponent.processMouseEvent(Unknown Source)
+	at java.awt.Component.processEvent(Unknown Source)
+	at java.awt.Container.processEvent(Unknown Source)
+	at java.awt.Component.dispatchEventImpl(Unknown Source)
+	at java.awt.Container.dispatchEventImpl(Unknown Source)
+	at java.awt.Component.dispatchEvent(Unknown Source)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
+	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
+	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
+	at java.awt.Container.dispatchEventImpl(Unknown Source)
+	at java.awt.Window.dispatchEventImpl(Unknown Source)
+	at java.awt.Component.dispatchEvent(Unknown Source)
+	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
+	at java.awt.EventQueue.access$400(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+	at java.awt.EventQueue$4.run(Unknown Source)
+	at java.awt.EventQueue$4.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+	at java.awt.EventQueue.dispatchEvent(Unknown Source)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.run(Unknown Source)
+ERROR [AWT-EventQueue-0] 2017-03-02 11:28:19,233 repast.simphony.context.DefaultContext - Projection 'Social network' has already been added
+Note that projection factories automatically add the projection to the context.
+java.lang.IllegalArgumentException: Duplicate projections added.
+	at repast.simphony.context.AbstractContext.addProjection(AbstractContext.java:360)
+	at repast.simphony.context.space.graph.NetworkBuilder.buildNetwork(NetworkBuilder.java:99)
+	at networkFormation.ModelSetup.build(ModelSetup.java:61)
+	at repast.simphony.dataLoader.engine.ClassNameContextBuilder.build(ClassNameContextBuilder.java:41)
+	at repast.simphony.dataLoader.engine.DataLoaderControllerAction.runInitialize(DataLoaderControllerAction.java:48)
+	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
+	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
+	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:292)
+	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
+	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
+	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:288)
+	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
+	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
+	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:157)
+	at repast.simphony.ui.RSApplication.step(RSApplication.java:209)
+	at repast.simphony.ui.action.StepRun.actionPerformed(StepRun.java:17)
+	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
+	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
+	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
+	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
+	at java.awt.Component.processMouseEvent(Unknown Source)
+	at javax.swing.JComponent.processMouseEvent(Unknown Source)
+	at java.awt.Component.processEvent(Unknown Source)
+	at java.awt.Container.processEvent(Unknown Source)
+	at java.awt.Component.dispatchEventImpl(Unknown Source)
+	at java.awt.Container.dispatchEventImpl(Unknown Source)
+	at java.awt.Component.dispatchEvent(Unknown Source)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
+	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
+	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
+	at java.awt.Container.dispatchEventImpl(Unknown Source)
+	at java.awt.Window.dispatchEventImpl(Unknown Source)
+	at java.awt.Component.dispatchEvent(Unknown Source)
+	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
+	at java.awt.EventQueue.access$400(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+	at java.awt.EventQueue$4.run(Unknown Source)
+	at java.awt.EventQueue$4.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+	at java.awt.EventQueue.dispatchEvent(Unknown Source)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.run(Unknown Source)
+ERROR [AWT-EventQueue-0] 2017-03-02 11:30:24,011 repast.simphony.ui.RSApplication - Error while initializing simulation
+java.lang.IndexOutOfBoundsException: Index: 43, Size: 43
+	at java.util.ArrayList.rangeCheck(Unknown Source)
+	at java.util.ArrayList.get(Unknown Source)
+	at networkFormation.ModelSetup.build(ModelSetup.java:104)
+	at repast.simphony.dataLoader.engine.ClassNameContextBuilder.build(ClassNameContextBuilder.java:41)
+	at repast.simphony.dataLoader.engine.DataLoaderControllerAction.runInitialize(DataLoaderControllerAction.java:48)
+	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
+	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
+	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:292)
+	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
+	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
+	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:288)
+	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
+	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
+	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:157)
+	at repast.simphony.ui.RSApplication.step(RSApplication.java:209)
+	at repast.simphony.ui.action.StepRun.actionPerformed(StepRun.java:17)
+	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
+	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
+	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
+	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
+	at java.awt.Component.processMouseEvent(Unknown Source)
+	at javax.swing.JComponent.processMouseEvent(Unknown Source)
+	at java.awt.Component.processEvent(Unknown Source)
+	at java.awt.Container.processEvent(Unknown Source)
+	at java.awt.Component.dispatchEventImpl(Unknown Source)
+	at java.awt.Container.dispatchEventImpl(Unknown Source)
+	at java.awt.Component.dispatchEvent(Unknown Source)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
+	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
+	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
+	at java.awt.Container.dispatchEventImpl(Unknown Source)
+	at java.awt.Window.dispatchEventImpl(Unknown Source)
+	at java.awt.Component.dispatchEvent(Unknown Source)
+	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
+	at java.awt.EventQueue.access$400(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+	at java.awt.EventQueue$4.run(Unknown Source)
+	at java.awt.EventQueue$4.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+	at java.awt.EventQueue.dispatchEvent(Unknown Source)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.run(Unknown Source)
+ERROR [AWT-EventQueue-0] 2017-03-02 11:40:24,122 repast.simphony.context.DefaultContext - Projection 'Social network' has already been added
+Note that projection factories automatically add the projection to the context.
+java.lang.IllegalArgumentException: Duplicate projections added.
+	at repast.simphony.context.AbstractContext.addProjection(AbstractContext.java:360)
+	at repast.simphony.context.space.graph.NetworkBuilder.buildNetwork(NetworkBuilder.java:99)
+	at networkFormation.ModelSetup.build(ModelSetup.java:61)
+	at repast.simphony.dataLoader.engine.ClassNameContextBuilder.build(ClassNameContextBuilder.java:41)
+	at repast.simphony.dataLoader.engine.DataLoaderControllerAction.runInitialize(DataLoaderControllerAction.java:48)
+	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
+	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
+	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:292)
+	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
+	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
+	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:288)
+	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
+	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
+	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:157)
+	at repast.simphony.ui.RSApplication.step(RSApplication.java:209)
+	at repast.simphony.ui.action.StepRun.actionPerformed(StepRun.java:17)
+	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
+	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
+	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
+	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
+	at java.awt.Component.processMouseEvent(Unknown Source)
+	at javax.swing.JComponent.processMouseEvent(Unknown Source)
+	at java.awt.Component.processEvent(Unknown Source)
+	at java.awt.Container.processEvent(Unknown Source)
+	at java.awt.Component.dispatchEventImpl(Unknown Source)
+	at java.awt.Container.dispatchEventImpl(Unknown Source)
+	at java.awt.Component.dispatchEvent(Unknown Source)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
+	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
+	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
+	at java.awt.Container.dispatchEventImpl(Unknown Source)
+	at java.awt.Window.dispatchEventImpl(Unknown Source)
+	at java.awt.Component.dispatchEvent(Unknown Source)
+	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
+	at java.awt.EventQueue.access$400(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+	at java.awt.EventQueue$4.run(Unknown Source)
+	at java.awt.EventQueue$4.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+	at java.awt.EventQueue.dispatchEvent(Unknown Source)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.run(Unknown Source)
+FATAL [Thread-7] 2017-03-02 11:44:13,747 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (1.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.CallBackAction.execute(CallBackAction.java:129)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:238)
+	at repast.simphony.engine.schedule.Schedule.executeEndActions(Schedule.java:363)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:63)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at networkFormation.Executor$$FastClassByCGLIB$$da72245e.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.CallBackAction.execute(CallBackAction.java:127)
+	... 6 more
+Caused by: java.lang.ArrayIndexOutOfBoundsException: -1
+	at java.util.ArrayList.elementData(Unknown Source)
+	at java.util.ArrayList.get(Unknown Source)
+	at networkFormation.Executor.output_finalDistances(Executor.java:276)
+	at networkFormation.Executor.output(Executor.java:204)
+	... 9 more
+INFO  [AWT-EventQueue-0] 2017-03-02 13:09:01,078 repast.simphony.batch.gui.BatchConfigMediator - Writing batch run config file to: C:\Users\t-work\Documents\GitHub\NetworkFormationABM\NetworkFormation\output\config.props
+INFO  [AWT-EventQueue-0] 2017-03-02 13:09:01,123 repast.simphony.batch.gui.BatchConfigMediator - Unrolling batch parameter file:
+	C:\Users\t-work\Documents\GitHub\NetworkFormationABM\NetworkFormation\batch\batch_params.xml to
+	C:\Users\t-work\AppData\Local\Temp\unrolledParamFile.txt

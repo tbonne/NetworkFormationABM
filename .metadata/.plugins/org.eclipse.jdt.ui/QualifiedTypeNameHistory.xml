@@ -38,4 +38,7 @@
 <fullyQualifiedTypeName name="repast.simphony.batch.BatchMain"/>
 <fullyQualifiedTypeName name="networkFormation.Parameter_set"/>
 <fullyQualifiedTypeName name="java.lang.Math"/>
+<fullyQualifiedTypeName name="org.apache.commons.math3.distribution.BinomialDistribution"/>
+<fullyQualifiedTypeName name="repast.simphony.engine.schedule.ScheduledMethod"/>
+<fullyQualifiedTypeName name="java.io.BufferedReader"/>
 </qualifiedTypeNameHistroy>

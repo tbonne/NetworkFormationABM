@@ -115,67 +115,52 @@ public class NetStats {
 			System.out.println("Failed to estimate cosine similarity: REXP Mismatch");
 
 		}
-
 	}
 	
 	/************************** Graph level statistics ******************************************/
 	
 	public static void calculateGraphLevelStats(RConnection c){
 		
-		int[][] asso = getAssociationMatrix();
+		double[][] asso = getAssociationMatrix();
 		
 		getGraphStatsFromR(c,asso);
-		getMeanDegree();
 		
 	}
 	
-	private static int[][] getAssociationMatrix(){
+	public static void calculateGraphLevelStats(RConnection c, boolean startingValues){
+		
+		double[][] asso = getAssociationMatrix();
+		
+		getStartingGraphStatsFromR(c,asso);
+		
+	}
+	
+	private static double[][] getAssociationMatrix(){
 		
 		ArrayList<Node> nodes = ModelSetup.getNodes();
 		Network net = ModelSetup.getNetwork();
-		int[][] associationM = new int[nodes.size()][nodes.size()];
+		double[][] associationM = new double[nodes.size()][nodes.size()];
 		
 		for(int i =0; i<nodes.size(); i++){
 			
 			for(int j = 0;j<nodes.size();j++){
 				
 				if(net.isAdjacent(nodes.get(i), nodes.get(j))){
-					associationM[i][j]=1;
+					associationM[i][j]=net.getEdge(nodes.get(i), nodes.get(j)).getWeight()+0;
 				} else {
 					associationM[i][j]=0;
 				}
 			}
 		}
-		
 		return associationM;
-		
-		
-	}
-	
-	private static void getAvgBetweenness(){
-		
-	}
-	
-	private static void getMeanDegree(){
-		
-		double degreeSUM = 0;
-		for(Node i : ModelSetup.getNodes()){
-			
-			degreeSUM = degreeSUM + i.getDegree();
-			
-		}
-		
-		double meanDegree = degreeSUM/(double)ModelSetup.getNodes().size();
-		Executor.addToMeanDegreeArray(meanDegree);
-		
 	}
 	
 	
-	private static void getGraphStatsFromR(RConnection c, int[][] asso){
+	private static void getGraphStatsFromR(RConnection c, double[][] asso){
 		
 		try {
 			//System.out.println("Attempting to use R");
-			REXP clusterC, betweenness, mod;
+			REXP clusterC, betweenness, mod, strength;
 			
 			c.eval("library(igraph)");
 
@@ -185,6 +170,7 @@ public class NetStats {
 			c.eval("gg <- graph_from_adjacency_matrix(a.m)");
 			c.eval("gg.cluster <- transitivity(gg)");
 			c.eval("gg.betweenness <- mean(betweenness(gg))");
+			c.eval("gg.strength <- mean(strength(gg))");
 			c.eval("gg.commu <- cluster_walktrap(gg)");
 			c.eval("gg.mod <- modularity(gg.commu)");
 
@@ -205,6 +191,68 @@ public class NetStats {
 			double modularity = mod.asDouble();
 			Executor.setModularity(modularity);
 			Executor.addToModularityArray(modularity);
+			
+			//strength
+			strength = c.eval("gg.strength");
+			double stre = strength.asDouble();
+			Executor.setStrength(stre);
+			Executor.addToDegreeArray(stre);
+
+		} catch (RserveException rs){
+			rs.printStackTrace();
+			System.out.println("Failed to estimate cosine similarity: Rserve");
+		} catch (REngineException re){
+			re.printStackTrace();
+			System.out.println("Failed to estimate cosine similarity: Rengine");
+		} catch (REXPMismatchException rm){
+			rm.printStackTrace();
+			System.out.println("Failed to estimate cosine similarity: REXP Mismatch");
+
+		}
+		
+		
+	}
+	
+	
+	private static void getStartingGraphStatsFromR(RConnection c, double[][] asso){
+		
+		try {
+			//System.out.println("Attempting to use R");
+			REXP clusterC, betweenness, mod, degree;
+			
+			c.eval("library(igraph)");
+			c.eval("library(tnet)");
+
+			//caculate in R the distance D from the observed distributions
+			assignAsRMatrix(c,asso, "a");
+			c.eval("a.m <- as.matrix(a)");
+			c.eval("gg <- graph_from_adjacency_matrix(a.m, mode=c('undirected'), weighted = T)");
+			c.eval("net.t <- as.tnet(a.m, type='weighted one-mode tnet')");
+			c.eval("gg.cluster <- clustering_w(net.t, measure = c('gm','bi'))");
+			c.eval("gg.betweenness <- mean(betweenness_w(net.t,alpha = 0.5)[,2])");
+			c.eval("gg.degree <- mean(degree_w(net.t,alpha=0.5,measure=c('alpha'))[,2])");
+			c.eval("gg.commu <- cluster_walktrap(gg)");
+			c.eval("gg.mod <- modularity(gg.commu)");
+
+			//clustering coef
+			clusterC = c.eval("gg.cluster");
+			double cluster = clusterC.asDouble();
+			Executor.setStartingClusteringCoef(cluster);
+
+			//betweenness
+			betweenness = c.eval("gg.betweenness");
+			double bet = betweenness.asDouble();
+			Executor.setStartingBetweennessCoef(bet);
+			
+			//modularity
+			mod = c.eval("gg.mod");
+			double modularity = mod.asDouble();
+			Executor.setStartingModularity(modularity);
+			
+			//strength
+			degree = c.eval("gg.degree");
+			double deg = degree.asDouble();
+			Executor.setStartingDegree(deg);
 
 		} catch (RserveException rs){
 			rs.printStackTrace();
@@ -231,7 +279,7 @@ public class NetStats {
      * @return R matrix instance or null if R return an error
      * @throws REngineException 
      */
-    public static REXP assignAsRMatrix(RConnection c, int[][] sourceArray, String nameToAssignOn) throws REngineException {
+    public static REXP assignAsRMatrix(RConnection c, double[][] sourceArray, String nameToAssignOn) throws REngineException {
         if (sourceArray.length == 0) {
             return null;
         }

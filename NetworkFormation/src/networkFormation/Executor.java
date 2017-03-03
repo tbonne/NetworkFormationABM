@@ -12,6 +12,7 @@ import org.rosuda.REngine.Rserve.RConnection;
 import org.rosuda.REngine.Rserve.RserveException;
 
 import repast.simphony.engine.environment.RunEnvironment;
+import repast.simphony.engine.schedule.ScheduledMethod;
 import repast.simphony.random.RandomHelper;
 import repast.simphony.space.graph.Network;
 import repast.simphony.space.graph.RepastEdge;
@@ -19,19 +20,24 @@ import repast.simphony.space.graph.RepastEdge;
 public class Executor {
 
 	public static int stepCounter;
-	public static double cosS,cosSPr,clusteringC,meanBetweennes,modularity;
-	public static ArrayList<Double> meanNodeDegreeArray, clusteringCoefArray, cosineArray,cosinePrArray,modularityArray,betweennesArray;
+	public static double cosS,cosSPr,clusteringC,meanBetweennes,modularity,strength;
+	public static double startingClusteringC,startingMeanBetweennes,startingModularity,startingDegree;
+	public static ArrayList<Double> meanNodeDegreeArray, clusteringCoefArray, cosineArray,cosinePrArray,modularityArray,betweennesArray,degreeArray;
 	private static BinomialDistribution bd_Pwr, bd_Pwn;
 
 	public Executor (){
 		cosS = 0;
 		clusteringC=0;
+		modularity=0;
+		strength=0;
 		meanNodeDegreeArray = new ArrayList<Double>();
 		clusteringCoefArray = new ArrayList<Double>();
 		cosineArray = new ArrayList<Double>();
 		cosinePrArray = new ArrayList<Double>();
 		modularityArray = new ArrayList<Double>();
 		betweennesArray = new ArrayList<Double>();
+		degreeArray = new ArrayList<Double>();
+		
 		stepCounter=0;
 		bd_Pwr = new BinomialDistribution(Parameter_set.maxGroomingEffort, Parameter_set.Pwr);
 		bd_Pwn = new BinomialDistribution(Parameter_set.maxGroomingEffort, Parameter_set.Pwn);
@@ -56,7 +62,7 @@ public class Executor {
 		//step counter 
 		stepCounter++;
 
-		if(stepCounter>Parameter_set.runTime){
+		if(stepCounter>Parameter_set.endAt){
 			endModel();
 		}
 	}
@@ -79,7 +85,7 @@ public class Executor {
 		Node mother = ModelSetup.getRandNode();
 
 		//create new id
-		Node newID = new Node();
+		Node newID = new Node("newID");
 		ModelSetup.getContext().add(newID);
 		ModelSetup.addNode(newID);
 
@@ -183,10 +189,9 @@ public class Executor {
 			ModelSetup.getContext().remove(n);
 
 		}
-
 	}
 
-	private static void endModel(){
+ 	private static void endModel(){
 		RunEnvironment.getInstance().endAt(RunEnvironment.getInstance().getCurrentSchedule().getTickCount());
 	}
 
@@ -194,13 +199,10 @@ public class Executor {
 	/************************************ Output tools/methods ****************************************/
 	/******************************************************************************************************/
 
+	
 	public static void output(){
-
 		output_eachTimeStep();
 		output_finalDistances();
-
-
-
 	}
 
 	private static void output_eachTimeStep(){
@@ -285,12 +287,24 @@ public class Executor {
 		}
 		sd = Math.pow(sd/(Parameter_set.cosineMeanLength-1),0.5);
 		sdPr = Math.pow(sdPr/(Parameter_set.cosineMeanLength-1),0.5);
+		
+		//print sum of squares output for r to use
+		double ss_degree = Math.pow(degreeArray.get(degreeArray.size()-1)-startingDegree, 2);
+		double ss_betweenness = Math.pow(betweennesArray.get(betweennesArray.size()-1)-startingMeanBetweennes, 2);
+		double ss_clustering = Math.pow(clusteringCoefArray.get(clusteringCoefArray.size()-1)-startingClusteringC, 2);
+		System.out.println("ss_degree"); 
+		System.out.println(ss_degree); 	
+		System.out.println("ss_betweenness"); 
+		System.out.println(ss_betweenness); 
+		System.out.println("ss_transitivity"); 
+		System.out.println(ss_clustering);
+		
 
-		//Transfer the recorded data to the output file
+		//Transfer the recorded data to an output csv file
 		try {
 
 			//record values
-			summaryStats_out.append(((Double)meanNodeDegreeArray.get(0)).toString());
+			summaryStats_out.append(((Double)degreeArray.get(0)).toString());
 			summaryStats_out.append(",");
 			summaryStats_out.append(((Double)clusteringCoefArray.get(0)).toString());
 			summaryStats_out.append(",");
@@ -300,7 +314,7 @@ public class Executor {
 			summaryStats_out.append(",");
 			summaryStats_out.append(((Double)modularityArray.get(0)).toString());
 			summaryStats_out.append(",");
-			summaryStats_out.append(((Double)meanNodeDegreeArray.get(meanNodeDegreeArray.size()-1)).toString());
+			summaryStats_out.append(((Double)degreeArray.get(degreeArray.size()-1)).toString());
 			summaryStats_out.append(",");
 			summaryStats_out.append(((Double)clusteringCoefArray.get(clusteringCoefArray.size()-1)).toString());
 			summaryStats_out.append(",");
@@ -317,7 +331,7 @@ public class Executor {
 			summaryStats_out.append(",");
 			summaryStats_out.append(((Double)modularityArray.get(modularityArray.size()-1)).toString());
 			summaryStats_out.append(",");
-			summaryStats_out.append(((Integer)(Parameter_set.runTime)).toString());
+			summaryStats_out.append(((Integer)(Parameter_set.endAt)).toString());
 			summaryStats_out.append(", ");
 			summaryStats_out.append(((Double)Parameter_set.Pb).toString());
 			summaryStats_out.append(", ");
@@ -380,14 +394,39 @@ public class Executor {
 	public static void addToModularityArray(double d){
 		modularityArray.add(d);
 	}
+	public static void addToDegreeArray(double d){
+		degreeArray.add(d);
+	}
 	public static void setModularity(double d){
 		modularity = d;
 	}
 	public static double getModularity(){
 		return modularity;
 	}
+	public static void setStrength(double d){
+		strength = d;
+	}
+	public static double getStrength(){
+		return strength;
+	}
 	public static void setCosineSimilarityPr(double cosPr) {
 		cosSPr = cosPr;
+	}
+
+	public static void setStartingClusteringCoef(double cluster) {
+		startingClusteringC = cluster;
+	}
+
+	public static void setStartingBetweennessCoef(double bet) {
+		startingMeanBetweennes = bet;
+	}
+
+	public static void setStartingModularity(double modularity2) {
+		startingModularity = modularity2;
+	}
+
+	public static void setStartingDegree(double stre) {
+		startingDegree = stre;
 	}
 
 }

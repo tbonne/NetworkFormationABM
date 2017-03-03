@@ -1,5 +1,6 @@
 package networkFormation;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -26,16 +27,16 @@ import repast.simphony.space.graph.Network;
 import repast.simphony.space.graph.RepastEdge;
 
 public class ModelSetup implements ContextBuilder<Object>{
-	
+
 	private static Context mainContext;
 	public static ContinuousSpace <Object > space;
 	public static ArrayList<Node> allNodes;
 	public static ArrayList<Node> allInputNodes;
 	public static ArrayList<RepastEdge> allEdges;
 	public static Network network;
-	
+
 	private static RConnection c;
-	
+
 	public Context<Object> build(Context<Object> context){
 		System.out.println("Running Network Formation model");
 
@@ -50,16 +51,19 @@ public class ModelSetup implements ContextBuilder<Object>{
 		allInputNodes = new ArrayList<Node>();	
 		allEdges = new ArrayList<RepastEdge>();
 		Parameter_set p = new Parameter_set();
+		if(Parameter_set.runFromCommandLine==true){
+			resetP();
+		}
 
 		System.out.println("Building geog");
-		
+
 		NetworkBuilder <Object> netBuilder = new NetworkBuilder <Object > ("Social network", context , false); 
 		network = netBuilder.buildNetwork();
-		
+
 		//layout = new FruchGraphLayout(agentList, xSize, ySize);
 		//Network2DDisplay display = new Network2DDisplay(layout);
 		//surface.addDisplayableProbeable(display, "Network Display");
-		
+
 
 		/************************************
 		 * 							        *
@@ -68,15 +72,15 @@ public class ModelSetup implements ContextBuilder<Object>{
 		 * *********************************/
 
 		System.out.println("creating graph: Pr = "+Parameter_set.Pr+" Pn = "+Parameter_set.Pn + " Pwr = "+ Parameter_set.Pwr+ " Pwn = "+ Parameter_set.Pwn); 
-		
+
 		//read in data
 		String[][] dataArr=null;
 		List<String[]> list=null;
 		try {
 			//read data
-			CSVReader csvReader = new CSVReader(new FileReader(new File("data/RST7.csv")));
+			CSVReader csvReader = new CSVReader(new FileReader(new File("data/RST7_undir.csv")));
 			list = csvReader.readAll();
-			 
+
 			//Convert to 2D array
 			dataArr = new String[list.size()][];
 			dataArr = list.toArray(dataArr);
@@ -84,31 +88,42 @@ public class ModelSetup implements ContextBuilder<Object>{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		//create nodes
-		for (int j = 0; j < list.size(); j++){
-			Node node = new Node();
+		for (int j = 1; j < list.size(); j++){
+			String name = dataArr[0][j];
+			Node node = new Node(name);
 			context.add(node);
 			allNodes.add(node);
 		}
-		
+
 		//add edges
 		for(int i = 1;i<list.size();i++){
 			for(int j = 1; j<list.size();j++){
 				double weight = Integer.parseInt(dataArr[i][j]);
 				if(weight>0){
-					network.addEdge(allNodes.get(i), allNodes.get(j),weight);
+					network.addEdge(allNodes.get(i-1), allNodes.get(j-1),weight);
 				} else {
 					//no edge
 				}
 			}
 		}
-		
+
 		//initialize nodes
 		for(Node n : allNodes){
 			n.step();
 		}
 		
+		//record starting network values of the observed network
+		try {
+			RConnection c = new RConnection();
+			NetStats.calculateGraphLevelStats(c,true);
+			c.close();
+		} catch (RserveException e) {
+			//TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 
 		/************************************
 		 * 							        *
@@ -136,9 +151,9 @@ public class ModelSetup implements ContextBuilder<Object>{
 			//net.addEdge(re);
 			initalEdges--;
 		}
-		
-		*/
-		
+
+		 */
+
 		/************************************
 		 * 							        *
 		 * Scheduler to synchronize runs	*
@@ -152,45 +167,77 @@ public class ModelSetup implements ContextBuilder<Object>{
 
 		return context;
 	}
-	
+
 	private void createSchedule(Executor executor){
 
 		ISchedule schedule = RunEnvironment.getInstance().getCurrentSchedule();
-		
+
 		ScheduleParameters agentStepParams_space = ScheduleParameters.createRepeating(1, 1, 2); //start, interval, priority (high number = higher priority)
 		schedule.schedule(agentStepParams_space,executor,"removeNode");
 
 		ScheduleParameters agentStepParams_death = ScheduleParameters.createRepeating(1, 1, 0); //start, interval, priority (high number = higher priority)
 		schedule.schedule(agentStepParams_death,executor,"step");
-		
+
 		ScheduleParameters stop = ScheduleParameters.createAtEnd(ScheduleParameters.LAST_PRIORITY);
 		schedule.schedule(stop, executor, "output");
 
 	}
-	
-	
+
+	private static void resetP(){
+
+		String csvFile = Parameter_set.parameters_csv;
+		String line = "";
+		String cvsSplitBy = ",";
+		String[] params_new=null;
+
+
+		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+
+			while ((line = br.readLine()) != null) {
+
+				// use comma as separator
+				params_new = line.split(cvsSplitBy);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		Parameter_set.Pn = Double.parseDouble(params_new[0]);
+		Parameter_set.Pr = Double.parseDouble(params_new[1]);
+		Parameter_set.Pwn = Double.parseDouble(params_new[2]);
+		Parameter_set.Pwr = Double.parseDouble(params_new[3]);
+		Parameter_set.endAt = Integer.parseInt(params_new[4]);
+
+	}
+
+
 	/**********************************get and set methods *********************************************/
-	
+
+	public static void endAt(int d){
+		Parameter_set.endAt = d;
+	}
+
 	public static Context getContext(){
 		return mainContext;
 	}
-	
+
 	public static Network getNetwork(){
 		return network;
 	}
-	
+
 	public static ContinuousSpace getSpace(){
 		return space;
 	}
-	
+
 	public static ArrayList<Node> getNodes(){
 		return allNodes;
 	}
-	
+
 	public static void addNode(Node n){
 		allNodes.add(n);
 	}
-	
+
 	public static void removeNode(Node n){
 		allNodes.add(n);
 	}
@@ -198,6 +245,6 @@ public class ModelSetup implements ContextBuilder<Object>{
 		Collections.shuffle(allNodes);
 		return allNodes.get(0);
 	}
-	
+
 
 }

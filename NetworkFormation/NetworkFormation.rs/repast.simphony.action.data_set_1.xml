@@ -1,7 +1,6 @@
 <repast.simphony.data2.engine.DataSetDescriptor>
-  <name>Node Degree</name>
-  <type>NON_AGGREGATE</type>
-  <sourceType>networkFormation.Node</sourceType>
+  <name>GraphData</name>
+  <type>AGGREGATE</type>
   <inclTick>true</inclTick>
   <inclBatchRun>false</inclBatchRun>
   <inclRandomSeed>false</inclRandomSeed>
@@ -12,16 +11,53 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>219962176</hashCode>
+    <hashCode>2071589966</hashCode>
   </scheduleParams>
   <atEnd>false</atEnd>
   <methodDataSources class="linked-hash-map">
     <entry>
-      <string>Degree</string>
+      <string>Bet</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>Degree</id>
-        <className>networkFormation.Node</className>
-        <methodName>getDegree</methodName>
+        <id>Bet</id>
+        <className>networkFormation.Executor</className>
+        <methodName>getBetweennessCoef</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>Trans</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Trans</id>
+        <className>networkFormation.Executor</className>
+        <methodName>getClusteringCoef</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>Cosine</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Cosine</id>
+        <className>networkFormation.Executor</className>
+        <methodName>getCosineSimilarity</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>Mod</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Mod</id>
+        <className>networkFormation.Executor</className>
+        <methodName>getModularity</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>Strength</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Strength</id>
+        <className>networkFormation.Executor</className>
+        <methodName>getStrength</methodName>
+        <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
   </methodDataSources>

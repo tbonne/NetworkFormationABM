@@ -4,7 +4,7 @@
 	<parameter name="randomSeed" displayName="Default Random Seed"
 		type="int" defaultValue="__NULL__" />
 
-	<parameter name="runTime" displayName="max run time" type="int"
+	<parameter name="endAt" displayName="max run time" type="int"
 		defaultValue="500" />
 
 	<parameter name="Pn" displayName="Pn: Prob ties with mother's partner"
@@ -23,7 +23,7 @@
 		type="double" defaultValue="0.1" isReadOnly="false"
 		converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter" />
 		
-		<parameter name="Pwn" displayName="Pwn: Prob of effort in a random partner"
+	<parameter name="Pwn" displayName="Pwn: Prob of effort in a random partner"
 		type="double" defaultValue="0.3" isReadOnly="false"
 		converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter" />
 
